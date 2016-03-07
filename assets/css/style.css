@@ -15,6 +15,10 @@ p {color: #888;}
 	h4 {font-size: 1.5rem;}
 }
 
+#nav .navbar-brand i {
+	margin: 0 8px 0 0;
+}
+
 .row {
 	padding: 30px 15px;
 	position: relative;
@@ -88,17 +92,6 @@ p {color: #888;}
 	.row .prev {top: 40px;}
 }
 
-.row .fade {
-	display: block;
-	position: absolute;
-	top: 50%;
-	bottom: 0;
-	left: 0;
-	right: 0;
-}
-
-.row .fade.primary {background: linear-gradient(rgba(2, 117, 216, 0), rgba(2, 117, 216, 1) 95%);}
-
 @media (min-width: 34em) {
 	.row#top {padding: 5% 0 0 0;}
 }
@@ -122,6 +115,11 @@ p {color: #888;}
 	text-align: center;
 }
 
+.row#top h1.title i {
+	margin: 0 10px 0 0;
+	vertical-align: text-bottom;
+}
+
 .row#top p.tagline {
 	color: rgba(255, 255, 255, 0.75);
 	margin: 0 auto 25px;
@@ -135,6 +133,7 @@ p {color: #888;}
 	color: #FFF;
 	display: block;
 	margin: 0 auto 5px;
+	transition: box-shadow .2s;
 	width: 40%;
 }
 
@@ -142,6 +141,10 @@ p {color: #888;}
 .row#top .btn.download:focus {
 	background: #FFF;
 	color: #0277D8;
+}
+
+.row#top .btn.download:active {
+	box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
 .row#top p.version {
@@ -165,7 +168,7 @@ p {color: #888;}
 	.row#top .validation {padding: 30px 15%;}
 }
 
-.row#features {background-color: #eee;}
+.row#features {background-color: #eee; border-bottom: 1px solid #e0e0e0;}
 .row#usage {background-color: #fff;}
 
 .row#contact {background-color: #aaa; min-height: 400px;}
@@ -192,7 +195,7 @@ p {color: #888;}
 	padding: 30px 20px 20px;
 }
 
-.row#contact .contact h4 {text-align: center; margin: 0;}
+.row#contact .contact h4 {text-align: center; margin: 0 0 2px;}
 
 .row#contact .contact small {color: #999; display: block; padding: 0 0 10px; text-align: center;}
 
