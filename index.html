@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="assets/css/bootstrap.css">
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/prettyValidate.css">
+		<link rel="stylesheet" href="assets/css/github.css">
 		<link rel="stylesheet" href="assets/css/style.css">
 	</head>
 	<body data-spy="scroll" data-target="#nav" data-offset="54">
@@ -71,13 +72,42 @@
 				<div class="title col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
 					<h1>Usage</h1>
 				</div>
-				<div class="col-lg-5 col-xl-4 col-lg-offset-1 col-xl-offset-2">
-					<h4>Scripting</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<div class="col-lg-5 col-xl-4 col-lg-offset-1 col-xl-offset-2" id="requirements">
+					<h4>Requirements</h4>
+					<p>prettyValidate requires the use of <u>jQuery v2.2</u> and up as well as <u>Bootstrap v3.3</u> and up. You can get each of prettyValidates dependancies by following the links below:</p>
+					<ul>
+						<li><a href="https://jquery.com/download/">jQuery v2.2.x</a> (latest)</li>
+						<li><a href="http://getbootstrap.com/getting-started/#download">Bootstrap v3.3.x</a> (latest)</li>
+					</ul>
+					<p class="small">If you would like to contribute your ideas to make prettyValidate more compatible with older versions of its dependancies, feel free to contact me in regards to becoming a contributor.</p>
 				</div>
 				<div class="col-lg-5 col-xl-4">
-					<h4>Documentation</h4>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+					<h4>Getting Started</h4>
+					<p>Copy-paste the the stylesheet <code>&lt;link&gt;</code> into your <code>&lt;head&gt;</code> right before your "style.css" file.</p>
+					<figure class="highlight"><pre><code class="language-html">&lt;link rel="stylesheet" href="css/prettyValidate.css"&gt;</code></pre></figure>
+					<p>Add the JavaScript plugin after jQuery has been called, right before the closing <code>&lt;body&gt;</code> tag.</p>
+					<figure class="highlight"><pre><code class="language-html">&lt;script type="text/javascript" src="js/prettyValidate.js"&gt;&lt;/script&gt;</code></pre></figure>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2"><br>
+					<h4><em>.prettyValidate()</em></h4>
+					<p>To use, simply call the <code>.prettyValidate()</code> function:</p>
+					<figure class="highlight">
+						<pre><code class="language-javascript">// Initialize
+$("#form").prettyValidate();</code></pre>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2"><br>
+					<h4><em>.prettyValidate(options)</em></h4>
+					<p>prettyValidate only has a few options but can be modified with the following:</p>
+					<figure class="highlight">
+						<pre><code class="language-javascript">// Initialize
+$("#form").prettyValidate({
+	reset: true, // reset the form once it's submitted
+	shake: true, // shake the input if invalid
+	success: function(){}, // fired once form is successfully validated
+	error: function(){} // fired if an error is found
+});</code></pre>
+					</figure>
 				</div>
 				<a href="#contact" class="next light hidden-xs-down">contact<span></span>developer</a>
 			</section>
@@ -121,6 +151,7 @@
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.colourbrightness.min.js"></script>
 		<script type="text/javascript" src="assets/js/prettyValidate.js"></script>
+		<script type="text/javascript" src="assets/js/highlight.js"></script>
 		<script type="text/javascript" src="assets/js/main.js"></script>
 	</body>
 </html>

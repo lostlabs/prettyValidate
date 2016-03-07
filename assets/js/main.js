@@ -26,6 +26,12 @@ $(document).ready(function () {
 	
 	$(window).on('resize', function() { resize(); }); resize();
 	
+	hljs.configure({ tabReplace: '    ' });
+	
+	$('pre code').each(function(i, block) {
+		hljs.highlightBlock(block);
+	});
+	
 	$('.validation').prettyValidate({
 		success: function() {
 			var form = $('form.validation').serialize();
