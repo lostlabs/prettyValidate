@@ -1,0 +1,196 @@
+.prettyValidate h5 {
+	color: #555;
+	font-weight: bold;
+	margin: 0;
+	padding: 0 0 10px;
+	text-align: center;
+}
+
+.prettyValidate .line {
+	background: #0275d8;
+	border-radius: 3px 3px 0 0;
+	height: 5px;
+}
+
+.prettyValidate fieldset {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-top: none;
+	border-bottom: 1px solid #eee;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+.prettyValidate fieldset label {
+	color: #aaa;
+	font-size: 14px;
+	line-height: 16px;
+	margin: 0;
+	padding: 12px 15px;
+}
+
+.prettyValidate fieldset .form-control {
+	background-color: transparent;
+	border: 0;
+	font-size: 14px;
+	line-height: 16px;
+	outline: none;
+	padding: 12px 15px;
+	position: relative;
+	resize: none;
+	width: 100%;
+}
+
+.prettyValidate fieldset .form-control[type="color"] {
+	height: 42px;
+	margin: -1px;
+	padding: 0;
+	width: calc(100% + 2px);
+}
+
+.prettyValidate fieldset .form-control[type="color"] + label {
+	bottom: 6px;
+	color: rgba(0, 0, 0, 0.32);
+	font-size: 14px;
+	font-weight: bold;
+	left: 15px;
+	line-height: 28px;
+	padding: 0;
+	pointer-events: none;
+	position: absolute;
+}
+
+.prettyValidate fieldset .form-control[type="color"]::-webkit-color-swatch-wrapper {padding: 0;}
+
+.prettyValidate fieldset .form-control[type="color"]::-webkit-color-swatch {
+	border: none;
+	box-shadow:
+		inset 0 1px 0 rgba(0, 0, 0, 0.07),
+		inset 0 -1px 0 rgba(0, 0, 0, 0.07),
+		inset 1px 0 0 rgba(0, 0, 0, 0.13),
+		inset -1px 0 0 rgba(0, 0, 0, 0.13);
+}
+
+.prettyValidate fieldset .form-control[type="color"] + label i {
+	background: rgba(0, 0, 0, 0.25);
+	border-radius: 3px;
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 12px;
+	line-height: 28px;
+	margin: 0 4px 0 0;
+	padding: 0 9px;
+	vertical-align: top;
+}
+
+.prettyValidate fieldset .form-control[type="color"].dark + label {color: rgba(255, 255, 255, 0.7);}
+.prettyValidate fieldset .form-control[type="color"].dark + label i {background: rgba(255, 255, 255, 0.7);}
+
+.prettyValidate fieldset .form-control[type="range"] {
+	margin: 0;
+	padding: 18px 15px 17px;
+	width: calc(100% - 65px);
+	-webkit-appearance: none;
+}
+
+.prettyValidate fieldset .form-control[type="range"]::-webkit-slider-thumb {
+	background: #c0c0c0;
+	border-radius: 50%;
+	height: 15px;
+	margin-top: -5px;
+	width: 15px;
+	-webkit-appearance: none;
+}
+
+.prettyValidate fieldset .form-control[type="range"]::-webkit-slider-runnable-track {
+  background: #eee;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 5px;
+  width: 100%;
+}
+
+.prettyValidate fieldset .form-control[type="range"]:active::-webkit-slider-thumb {background: #b0b0b0;}
+
+.prettyValidate fieldset label.value {
+	color: #777;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0 0 -3px -10px;
+	padding: 13px 5px 3px;
+}
+
+.prettyValidate fieldset label.min {
+	bottom: 6px;
+	color: #aaa;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 28px;
+	padding: 0;
+	pointer-events: none;
+	position: absolute;
+	left: 15px;
+}
+
+.prettyValidate fieldset label.max {
+	bottom: 6px;
+	color: #aaa;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 28px;
+	padding: 0;
+	pointer-events: none;
+	position: absolute;
+	right: 15px;
+	text-align: right;
+}
+
+.prettyValidate fieldset label + .form-control[type="range"] {
+	margin: -12px 0 0;
+}
+
+.prettyValidate fieldset .form-control:-webkit-autofill {box-shadow: inset 0 0 0 20px #fff;}
+.prettyValidate fieldset .form-control::-webkit-input-placeholder {color: #aaa;}
+.prettyValidate fieldset .form-control:focus::-webkit-input-placeholder {color: #777;}
+
+.prettyValidate fieldset .form-control:disabled {opacity: 0.8; background: #fff;}
+
+.prettyValidate fieldset.shake .form-control,
+.prettyValidate fieldset.shake .form-control + label {animation: shake 0.4s ease-in-out;}
+
+@keyframes shake {
+	  0% {transform: translateX( 0  );}
+	 20% {transform: translateX(-6px);}
+	 40% {transform: translateX( 6px);}
+	 60% {transform: translateX(-4px);}
+	 80% {transform: translateX( 2px);}
+	100% {transform: translateX( 0  );}
+}
+
+.prettyValidate .btn-group {width: 100%;}
+
+.prettyValidate .btn-group .btn {
+	border-radius: 0 0 3px 3px;
+	font-weight: bold;
+}
+
+.prettyValidate .btn-group .btn[type="submit"] {width: 65%;}
+.prettyValidate .btn-group .btn[type="reset"] {width: 35%; margin: 0; color: #fff;}
+
+.prettyValidate .description {
+	background: #eee;
+	border: 1px solid #ddd;
+	border-bottom: 0;
+	border-top: 0;
+	color: #999;
+	font-size: 10px;
+	padding: 5px 15px;
+}
+
+.prettyValidate .description span {
+	bottom: -7px;
+	color: rgb(220, 0, 0);
+	font-size: 20px;
+	line-height: 0px;
+	position:  relative;
+	margin-right: 2px;
+}
