@@ -52,6 +52,7 @@ function empty(input) {
 		options = $.extend({
 			reset: true, // reset form on success
 			shake: true, // shake the fields when error
+			beforeSend: null, // fire before validation
 			success: null, // success callback
 			error: null // error callback
 		}, options);
@@ -106,6 +107,7 @@ function empty(input) {
 			// Submit Form
 			$(this).on('submit', function() {
 				event.preventDefault();
+				$.isFunction(options.beforeSend) && options.beforeSend.call(this);
 				var error = 0;
 				var form  = $(this);
 				var input = $('fieldset input, fieldset textarea', form);
