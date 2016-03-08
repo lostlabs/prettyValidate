@@ -194,8 +194,6 @@ p.small {color: #bbb;}
 .row#features {background-color: #f7f7f9; border-bottom: 1px solid rgba(0, 0, 0, 0.05);}
 .row#usage {background-color: #fff;}
 
-.row#usage #requirements p:first-of-type {margin: 0 0 8px;}
-
 .row#contact {background-color: #aaa; min-height: 400px;}
 
 @media (min-width: 34em) {

@@ -104,6 +104,7 @@ $("#form").prettyValidate();</code></pre>
 $("#form").prettyValidate({
 	reset: true, // reset the form once it's submitted
 	shake: true, // shake the input if invalid
+	beforeSend: function(){}, // fired before form is validated
 	success: function(){}, // fired once form is successfully validated
 	error: function(){} // fired if an error is found
 });</code></pre>

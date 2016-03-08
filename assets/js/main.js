@@ -26,9 +26,9 @@ $(document).ready(function () {
 	
 	$(window).on('resize', function() { resize(); }); resize();
 	
-	hljs.configure({ tabReplace: '    ' });
+	hljs.configure({ tabReplace: '    ', excludeBegin: true });
 	
-	$('pre code').each(function(i, block) {
+	$('figure code').each(function(i, block) {
 		hljs.highlightBlock(block);
 	});
 	
