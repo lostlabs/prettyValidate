@@ -41,16 +41,34 @@ p.small {color: #bbb;}
 }
 
 .row {
-	padding: 30px 15px;
+	padding: 15px;
 	position: relative;
 }
 
-@media (min-width: 34em) { .row {padding: 60px 50px;} }
-@media (min-width: 62em) { .row {padding: 100px 0;} }
-
-.row .title h1 {
-	margin: 0 0 30px;
+.row > .row {
+	padding: 0 .9375rem;
 }
+
+@media (min-width: 34em) { .row {padding: 45px 50px;} }
+@media (min-width: 62em) { .row {padding: 85px 0;} }
+
+div[class*='col-'] {
+    padding-top: .9375rem;
+    padding-bottom: .9375rem;
+}
+
+.row#top div[class*='col-'],
+.row#contact div[class*='col-'],
+footer .row div[class*='col-'] {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+div[class*='col-'] > *:last-child {
+	margin-bottom: 0;
+}
+
+.row .title h1 {margin: 0;}
 
 .row .next,
 .row .prev {
@@ -128,8 +146,6 @@ p.small {color: #bbb;}
 	background: linear-gradient(rgba(2, 117, 216, 0), rgba(2, 117, 216, 1) 90%);
 }
 
-.row#top .center-vertical {margin-top: 0;}
-
 .row#top h1.title {
 	color: #fff;
 	margin-bottom: 15px;
@@ -191,14 +207,26 @@ p.small {color: #bbb;}
 	.row#top .validation {padding: 30px 15%;}
 }
 
-.row#features {background-color: #f7f7f9; border-bottom: 1px solid rgba(0, 0, 0, 0.05);}
+.row#features {
+	background-color: #f7f7f9;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	text-align: center;
+}
+
+.row#features i.fa {
+	background: #fff;
+	border-radius: 50%;
+	box-sizing: border-box;
+	height: 140px;
+	line-height: 140px;
+	margin-bottom: 15px;
+	text-align: center;
+	width: 140px;
+}
+
 .row#usage {background-color: #fff;}
 
 .row#contact {background-color: #aaa; min-height: 400px;}
-
-@media (min-width: 34em) {
-	.row#contact {padding: 0;}
-}
 
 .row#contact #googlemaps,
 .row#contact #mapoverlay {
@@ -223,6 +251,7 @@ p.small {color: #bbb;}
 .row#contact .contact small {color: #999; display: block; padding: 0 0 10px; text-align: center;}
 
 @media (min-width: 34em) {
+	.row#contact {padding: 0;}
 	.row#contact .contact {padding: 30px 15%;}
 }
 
@@ -232,9 +261,6 @@ footer {
 }
 
 footer .row {padding: 20px 0; font-size: 12px;}
-
-footer .row .align-center {text-align: center;}
-footer .row .align-right {text-align: right;}
 
 footer .row a {color: #777; transition: color .3s;}
 footer .row a i {margin-right: 5px; font-size: 14px; transition: color .3s;}

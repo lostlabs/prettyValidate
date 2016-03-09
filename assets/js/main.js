@@ -28,8 +28,7 @@ $(document).ready(function () {
 	
 	$('[data-toggle="tooltip"]').tooltip();
 	
-	hljs.configure({ tabReplace: '    ', excludeBegin: true });
-	
+	hljs.configure({ tabReplace: '    ' });
 	$('figure code').each(function(i, block) {
 		hljs.highlightBlock(block);
 	});
