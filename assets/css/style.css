@@ -154,7 +154,7 @@ p.small {color: #bbb;}
 	color: #FFF;
 	display: block;
 	margin: 0 auto 5px;
-	transition: box-shadow .2s;
+	transition: background .3s, box-shadow .2s, color .3s;
 	width: 40%;
 }
 
@@ -231,6 +231,38 @@ footer {
 	border-bottom: 5px solid #0275d8;
 }
 
-footer .row {padding: 20px 0;}
+footer .row {padding: 20px 0; font-size: 12px;}
 
+footer .row .align-center {text-align: center;}
 footer .row .align-right {text-align: right;}
+
+footer .row a {color: #777; transition: color .3s;}
+footer .row a i {margin-right: 5px; font-size: 14px; transition: color .3s;}
+
+footer .row a:hover {color: #0275d8; text-decoration: none;}
+footer .row a:hover i {color: #fff;}
+
+footer .row .ttt {
+	border: 2px solid #777;
+	border-radius: 4px;
+	color: #777;
+	display: inline-block;
+	height: 24px;
+	margin: -4px 0;
+	padding: 4px;
+	transition:
+		border-color .3s,
+		box-shadow .2s,
+		color .3s;
+	vertical-align: middle;
+}
+
+footer .row .ttt i {
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 12px;
+	margin: 0;
+}
+
+footer .row .ttt:hover {border-color: #0275d8; color: #fff;}
+footer .row .ttt:active {box-shadow: 0 0 0 4px rgba(255,255,255,0.1);}

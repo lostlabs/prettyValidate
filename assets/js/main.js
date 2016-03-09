@@ -26,6 +26,8 @@ $(document).ready(function () {
 	
 	$(window).on('resize', function() { resize(); }); resize();
 	
+	$('[data-toggle="tooltip"]').tooltip();
+	
 	hljs.configure({ tabReplace: '    ', excludeBegin: true });
 	
 	$('figure code').each(function(i, block) {
