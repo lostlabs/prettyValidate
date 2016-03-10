@@ -50,11 +50,15 @@ function empty(input) {
 	
 		// Plugin Defaults
 		options = $.extend({
+			ajax: false, // use Ajax to submit the form
 			reset: true, // reset form on success
 			shake: true, // shake the fields when error
-			beforeSend: null, // fire before validation
-			success: null, // success callback
-			error: null // error callback
+			valid: null, // valid callback
+			invalid: null, // invalid callback
+			success: null, // form success callback
+			error: null, // error callback
+			complete: null, // once ajax is completed
+			beforeSend: null // fired before proccessing
 		}, options);
 		
 		// Run Plugin
@@ -106,7 +110,6 @@ function empty(input) {
 			
 			// Submit Form
 			$(this).on('submit', function() {
-				event.preventDefault();
 				$.isFunction(options.beforeSend) && options.beforeSend.call(this);
 				var error = 0;
 				var form  = $(this);
@@ -124,16 +127,36 @@ function empty(input) {
 					}
 				});
 				if (error == 0) {
-					$.isFunction(options.success) && options.success.call(this);
+					$.isFunction(options.valid) && options.valid.call(this);
+					if (!$.isFunction(options.valid) && !options.ajax) { return true }
+					else if (options.ajax) {
+						$.ajax({
+							url: form.attr("action"),
+							data: form.serialize(),
+							dataType: "json",
+							type: "post",
+							success: function(data) {
+								options.success.call(this, data)
+							},
+							error: function(data) {
+								options.error.call(this, data)
+							},
+							complete: function(data) {
+								options.complete.call(this, data)
+							}
+						});
+						return false
+					}
 					if (options.reset) form[0].reset();
 				} else {
-					$.isFunction(options.error) && options.error.call(this);
+					$.isFunction(options.invalid) && options.invalid.call(this);
 					if (options.shake) {
 						$(".has-danger, .has-warning", form).addClass("shake");
 						setTimeout(function() {
 							$(".has-danger, .has-warning", form).removeClass("shake");
 						}, 500);
 					}
+					return false
 				}
 			});
 			

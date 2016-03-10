@@ -8,20 +8,20 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  color: #333;
+  color: #373a3c;
   background: #f8f8f8;
 }
 
 .hljs-comment,
 .hljs-quote {
-  color: #998;
+  color: #999;
   font-style: italic;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-subst {
-  color: #333;
+  color: #069;
   font-weight: bold;
 }
 
@@ -29,12 +29,13 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-literal,
 .hljs-variable,
 .hljs-template-variable,
-.hljs-tag .hljs-attr {
+.hljs-tag .hljs-attr{
   color: #4f9fcf;
 }
 
 .hljs-string,
-.hljs-doctag {
+.hljs-doctag,
+.hljs-params {
   color: #d44950;
 }
 

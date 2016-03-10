@@ -66,17 +66,17 @@
 					<div class="col-md-4">
 						<a href="#"><i class="fa fa-code fa-5x"></i></a>
 						<h4>Minimal Coding</h4>
-						<p>Very minimal coding is required to set up prettyValidate. You can be up and running within minutes of installation and even without setting up options prettyValidate is ready to go right out of the box.</p>
+						<p>Very minimal coding is required to set it up. You can be up and running within minutes of installation and even without setting up options prettyValidate is ready to go right out of the box.</p>
 					</div>
 					<div class="col-md-4">
 						<a href="#"><i class="fa fa-html5 fa-5x"></i></a>
-						<h4>HTML5</h4>
+						<h4>HTML5 / CSS3</h4>
 						<p>prettyValidate uses the latest practices in HTML5 so that you can be sure that your form will stay HTML5 compliant, but incase you're not using HTML5 prettyValidate will still work the same.</p>
 					</div>
 					<div class="col-md-4">
 						<a href="#"><i class="fa fa-sliders fa-5x"></i></a>
 						<h4>Configurable</h4>
-						<p>Very minimal coding is required to set up prettyValidate. You can be up and running within minutes of installation and even without setting up options prettyValidate is ready to go right out of the box.</p>
+						<p>prettyValidate is customizable in any way you can think of. From how the form is submitted, to what happens before or after the fields are validated, to callbacks from any errors it encounters.</p>
 					</div>
 				</div>
 			</section>
@@ -110,15 +110,19 @@ $("#form").prettyValidate();</code></pre>
 				</div>
 				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
 					<h4><em>.prettyValidate(options)</em></h4>
-					<p>prettyValidate only has a few options but can be modified with the following:</p>
+					<p>The following are prettyValidate's options and their defaults:</p>
 					<figure class="highlight">
 						<pre><code class="language-javascript">// Initialize
 $("#form").prettyValidate({
+	ajax: false, // use Ajax to submit the form
 	reset: true, // reset the form once it's submitted
 	shake: true, // shake the input if invalid
-	beforeSend: function(){}, // fired before form is validated
-	success: function(){}, // fired once form is successfully validated
-	error: function(){} // fired if an error is found
+	valid: function(){}, // fired once form is successfully validated
+	invalid: function(){}, // fired if an invalid field is found
+	success: function(json){}, // if the form submit was a success
+	error: function(xhr, status, errorThrown){}, // if an error occured during submit
+	complete: function(xhr, status){}, // once ajax is complete
+	beforeSend: function(){} // fired before form is proccessed
 });</code></pre>
 					</figure>
 				</div>
@@ -147,13 +151,13 @@ $("#form").prettyValidate({
 		</div>
 		<footer class="container-fluid">
 			<section class="row">
-				<div class="col-lg-5 col-xl-3 col-lg-offset-1 col-xl-offset-2">
+				<div class="col-sm-4 col-lg-5 col-xl-3 col-lg-offset-1 col-xl-offset-2 text-sm-left text-xs-center">
 					<a href="#"><i class="fa fa-copyright"></i>2016 Mason Miller, Stream Companies</a>
 				</div>
-				<div class="col-lg-3 col-xl-2 text-xs-center">
+				<div class="col-sm-4 col-lg-3 col-xl-2 text-sm-center hidden-xs-down">
 					<a href="#top" class="ttt" data-toggle="tooltip" data-placement="top" title="Back To The Top"><i class="fa fa-angle-up"></i></a>
 				</div>
-				<div class="col-lg-5 col-xl-3 text-xs-right">
+				<div class="col-sm-4 col-lg-5 col-xl-3 text-sm-right text-xs-center">
 					<a href="http://github.com/thatguymason/prettyValidate/" title="Visit Github Repository"><i class="fa fa-github-alt"></i>GitHub Project</a>
 					&nbsp;·&nbsp;
 					<a href="http://github.com/thatguymason/prettyValidate/issues" title="Visit Github Repository"><i class="fa fa-code-fork"></i>Issues</a>
@@ -162,8 +166,8 @@ $("#form").prettyValidate({
 		</footer>
 		<script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-		<script src="//www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
-		<script type="text/javascript" src="assets/js/holder.js"></script>
+		<script type="text/javascript" src="assets/js/clipboard.min.js"></script>
+		<script type="text/javascript" src="assets/js/tether.min.js"></script>
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.colourbrightness.min.js"></script>
 		<script type="text/javascript" src="assets/js/prettyValidate.js"></script>
