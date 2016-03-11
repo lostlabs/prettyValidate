@@ -2,7 +2,7 @@ body {
 	background: #0275d8;
 	color: #777;
 	font-family: BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	margin-top: 54px;
+	padding-top: 54px;
 	position: relative;
 }
 
@@ -19,52 +19,75 @@ p.small {color: #bbb;}
 .highlight {
     background: #f7f7f9;
 	border-radius: 3px;
-    padding: 0.5rem 0.8rem 0.4rem;
+	position: relative;
 }
 .highlight pre {
     background: transparent;
     border: 0;
     margin-top: 0;
     margin-bottom: 0;
-    padding: 0;
+    padding: 0.6rem 1rem 0.6rem 1rem;
 }
+.highlight pre::after {
+	background: linear-gradient(to right, rgba(247, 247, 249, 0), rgba(247, 247, 249, 1));
+	bottom: 0;
+	content: ' ';
+	opacity: 0;
+	position: absolute;
+	right: 1rem;
+	top: 0;
+	transition: opacity .2s, width .2s;
+	width: 0px;
+}
+.highlight pre.rightfade::after {opacity: 1; width: 30px;}
+.highlight pre ::selection {background: rgba(50, 50, 50, 0.7); color: #fff;}
+.highlight pre ::-moz-selection {background: rgba(50, 50, 50, 0.7); color: #fff;}
 .highlight pre code {
     background: transparent;
 	font-size: inherit;
 	padding: 0;
 }
-.highlight pre ::selection {background: rgba(50, 50, 50, 0.7); color: #fff;}
-.highlight pre ::-moz-selection {background: rgba(50, 50, 50, 0.7); color: #fff;}
+.highlight pre code::-webkit-scrollbar {height: 0;}
 
-/* Copy Script Buttons */
+@media (min-width: 768px) {
+	.highlight pre {padding-right: 2.6rem;}
+	.highlight pre::after {right: 2.6rem;}
+}
+
+/* Copy To Clipboard Button */
 
 .bd-clipboard {
-	position: relative;
+	position: absolute;
 	display: none;
 	float: right;
+	right: .4rem;
+	top: .4rem;
 }
 @media (min-width: 768px) {
 	.bd-clipboard {display: block;}
 }
 
 .btn-clipboard {
-	background: rgba(247, 247, 249, 0.9);
+	background: transparent;
 	border-radius: 3px;
 	color: #818a91;
 	cursor: pointer;
 	display: block;
-	position: absolute;
-	font-size: 12px;
-	padding: .25rem .5rem;
-	right: .3rem;
-	top: .3rem;
-	transition: background .1s, color .1s;
+	font-size: 14px;
+	height: 27px;
+	line-height: 27px;
+	opacity: 0.3;
+	text-align: center;
+	transition: background .2s, color .15s, opacity .1s;
+	width: 1.8rem;
 	z-index: 10;
 }
 .btn-clipboard:hover {
 	background: #027de7;
-	color: #fff;
+	color: #fff !important;
 }
+
+.highlight:hover .btn-clipboard {opacity: 1;}
 
 @media (min-width: 62em) { 
 	h1 {font-size: 2.5rem;}
@@ -75,10 +98,8 @@ p.small {color: #bbb;}
 
 #nav ::selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
 #nav ::-moz-selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
-
-#nav .navbar-brand i {
-	margin: 0 8px 0 0;
-}
+#nav .navbar-brand i {margin: 0 8px 0 0;}
+#nav .navbar-brand span {background: rgba(50, 50, 50, 0.6); vertical-align: text-bottom;}
 
 .row {
 	padding: 15px;
@@ -108,6 +129,7 @@ div[class*='col-'] > *:last-child {
 }
 
 .row .title h1 {margin: 0;}
+.row .title .alert {display: none; margin-top: 1.875rem;}
 
 /* Next & Prev Buttons */
 
@@ -164,13 +186,10 @@ div[class*='col-'] > *:last-child {
 }
 
 
-/* === FIRST PAGE === */
+/* ============ FIRST PAGE ============ */
 
 .row#top ::selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
 .row#top ::-moz-selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
-@media (min-width: 34em) {
-	.row#top {padding: 5% 0 0 0;}
-}
 .row#top::after {
 	content: ' ';
 	display: block;
@@ -188,6 +207,12 @@ div[class*='col-'] > *:last-child {
 }
 .row#top h1.title i {
 	margin: 0 10px 0 0;
+	vertical-align: text-bottom;
+}
+.row#top h1.title span {
+	background: rgba(50, 50, 50, 0.6);
+	cursor: pointer;
+	margin-top: 15px;
 	vertical-align: text-bottom;
 }
 .row#top p.tagline {
@@ -238,12 +263,14 @@ div[class*='col-'] > *:last-child {
 	top: 0;
 }
 @media (min-width: 34em) {
+	.row#top {padding: 5% 0 0 0;}
+	.row#top h1.title span {margin-top: 0;}
 	.row#top .center-vertical {margin-top: -27px;}
 	.row#top .validation {padding: 30px 15%;}
 }
 
 
-/* === FEATURES === */
+/* ============ FEATURES ============ */
 
 .row#features {
 	background-color: #f7f7f9;
@@ -284,12 +311,14 @@ div[class*='col-'] > *:last-child {
 }
 
 
-/* === USAGE === */
+/* ============ USAGE ============ */
 
 .row#usage {background-color: #fff;}
+.row#usage .anchorjs-link {color: #b7b7b9; text-decoration: none; transition: color .2s, opacity .2s;}
+.row#usage .anchorjs-link:hover {color: #0275d8;}
 
 
-/* === CONTACT === */
+/* ============ CONTACT ============ */
 
 .row#contact {background-color: #aaa; min-height: 400px;}
 .row#contact #googlemaps,
@@ -315,7 +344,7 @@ div[class*='col-'] > *:last-child {
 }
 
 
-/* === FOOTER === */
+/* ============ FOOTER ============ */
 
 footer {
 	background-color: #333;

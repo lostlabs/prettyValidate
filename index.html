@@ -24,9 +24,9 @@
 	<body data-spy="scroll" data-target="#nav" data-offset="54">
 		<nav class="navbar navbar-fixed-top navbar-dark bg-primary" id="nav" role="navigation">
 			<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar">&#9776;</button>
-			<a class="navbar-brand hidden-sm-up pull-xs-right" href="#top"><i class="fa fa-check-square"></i>prettyValidate</a>
+			<a class="navbar-brand hidden-sm-up pull-xs-right" href="#top"><i class="fa fa-check-square"></i>prettyValidate <span class="label label-default">Beta</span></a>
 			<div class="collapse navbar-toggleable-xs" id="navbar">
-				<a class="navbar-brand hidden-xs-down" href="#top"><i class="fa fa-check-square"></i>prettyValidate</a>
+				<a class="navbar-brand hidden-xs-down" href="#top"><i class="fa fa-check-square"></i>prettyValidate <span class="label label-default">Beta</span></a>
 				<ul class="nav navbar-nav pull-sm-right">
 					<li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
@@ -38,10 +38,10 @@
 		<div class="container-fluid">
 			<section class="row full-height bg-primary" id="top">
 				<div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xl-offset-4">
-					<h1 class="title"><i class="fa fa-check-square-o"></i>prettyValidate</h1>
+					<h1 class="title"><i class="fa fa-check-square-o"></i>prettyValidate <span class="label label-default" data-toggle="tooltip" data-placement="top" title="Initial release coming soon!">Beta</span></h1>
 					<p class="tagline">Get rid of that <u>outdated</u> form validation you've been using for years and upgrade to something a bit <i>prettier</i>.</p>
 					<a href="http://github.com/thatguymason/prettyValidate/zipball/master" class="btn btn-secondary-outline download" target="_blank" title="Visit Github repository to download">Download</a>
-					<p class="version"><a href="http://github.com/thatguymason/prettyValidate/" target="_blank" title="GitHub Repository">Current v1.0.0-alpha.1</a></p>
+					<p class="version"><a href="http://github.com/thatguymason/prettyValidate/" target="_blank" title="GitHub Repository">Current v0.8.8-beta</a></p>
 					<form class="validation">
 						<h5>Test Validation Form</h5><div class="line"></div>
 						<fieldset class="form-group"><input type="text" class="form-control required" name="firstname" placeholder="First Name"></fieldset>
@@ -84,7 +84,7 @@
 				<div class="title col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
 					<h1>Usage</h1>
 				</div>
-				<div class="col-lg-5 col-xl-4 col-lg-offset-1 col-xl-offset-2" id="requirements">
+				<div class="col-lg-5 col-xl-4 col-lg-offset-1 col-xl-offset-2">
 					<h4>Requirements</h4>
 					<p>prettyValidate requires the use of <u>jQuery v2.2</u> and up as well as <u>Bootstrap v3.3</u> and up. You can get each of prettyValidates dependancies by following the links below:</p>
 					<ul>
@@ -121,7 +121,7 @@ $("#form").prettyValidate({
 	valid: function(){}, // fired once form is successfully validated
 	invalid: function(){}, // fired if an invalid field is found
 	success: function(json){}, // if the form submit was a success
-	error: function(xhr, status, errorThrown){}, // if an error occured during submit
+	error: function(xhr, status){}, // if an error occured during submit
 	complete: function(xhr, status){}, // once ajax is complete
 	beforeSend: function(){} // fired before form is proccessed
 });</code></pre>
@@ -153,21 +153,22 @@ $("#form").prettyValidate({
 		<footer class="container-fluid">
 			<section class="row">
 				<div class="col-sm-4 col-lg-5 col-xl-3 col-lg-offset-1 col-xl-offset-2 text-sm-left text-xs-center">
-					<a href="#"><i class="fa fa-copyright"></i>2016 Mason Miller, Stream Companies</a>
+					<a href="#"><i class="fa fa-copyright"></i>2016 Mason Miller</a> / <a href="http://github.com/thatguymason" target="_blank" title="Visit Github Profile">thatguymason</a>
 				</div>
 				<div class="col-sm-4 col-lg-3 col-xl-2 text-sm-center hidden-xs-down">
-					<a href="#top" class="ttt" data-toggle="tooltip" data-placement="top" title="Back To The Top"><i class="fa fa-angle-up"></i></a>
+					<a href="#top" class="ttt" data-toggle="tooltip" data-placement="top" title="Scroll to the top"><i class="fa fa-angle-up"></i></a>
 				</div>
 				<div class="col-sm-4 col-lg-5 col-xl-3 text-sm-right text-xs-center">
 					<a href="http://github.com/thatguymason/prettyValidate/" title="Visit Github Repository"><i class="fa fa-github-alt"></i>GitHub Project</a>
 					&nbsp;·&nbsp;
-					<a href="http://github.com/thatguymason/prettyValidate/issues" title="Visit Github Repository"><i class="fa fa-code-fork"></i>Issues</a>
+					<a href="http://github.com/thatguymason/prettyValidate/issues" title="Visit Issues Thread"><i class="fa fa-code-fork"></i>Issues</a>
 				</div>
 			</section>
 		</footer>
 		<script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
 		<script type="text/javascript" src="assets/js/clipboard.min.js"></script>
+		<script type="text/javascript" src="assets/js/anchor.min.js"></script>
 		<script type="text/javascript" src="assets/js/tether.min.js"></script>
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.colourbrightness.min.js"></script>

@@ -6,11 +6,11 @@
 	}
 
 	function resize() {
-		$(".row.full-height").each(function (){
+		$('.row.full-height').each(function (){
 			if ($(window).width() > em(34)) {
-				$(".row.full-height").css("min-height", $(window).height() - 54);
+				$('.row.full-height').css("min-height", $(window).height() - 54);
 				setTimeout(function(){
-					$(".center-vertical").each(function() {
+					$('.center-vertical').each(function() {
 						$(this).css({
 							position: "absolute",
 							top: ($(this).closest("section").height() - $(this).outerHeight()) / 2
@@ -18,23 +18,30 @@
 					});
 				}, 100);
 			} else {
-				$(".row.full-height").removeAttr("style");
-				$(".center-vertical").removeAttr("style");
+				$('.row.full-height').removeAttr("style");
+				$('.center-vertical').removeAttr("style");
 			}
+		});
+		$('.highlight pre code').each(function() {
+			if ($(this).get(0).scrollWidth > $(this).innerWidth()) { $(this).parent().addClass("rightfade"); }
+			else { $(this).parent().removeClass("rightfade"); }
 		});
 	}
 
 	$(document).ready(function () {
 		
-		$(window).on('resize', function() { resize(); }); resize();
-
+		$(window).on('resize load', function() { resize(); });
+		
+		anchors.add('#usage h1');
+		anchors.add('#usage h4');
+		
 		$('[data-toggle="tooltip"]').tooltip();
-
+		
 		hljs.configure({ tabReplace: '    ' });
 		$('figure code').each(function(i, block) {
 			hljs.highlightBlock(block);
 		});
-
+		
 		$('.validation').prettyValidate({
 			valid: function() {
 				var form = $('form.validation').serialize();
@@ -45,12 +52,14 @@
 			}
 		});
 
-		$('a[href*="#"]:not([href="#"])').click(function(e) {
+		$('a[href*="#"]:not([href="#"]):not(.anchorjs-link)').click(function(e) {
 			if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+				var dest   = $(this).attr('href');
 				var target = $(this.hash);
 				var scroll = $('body').scrollTop();
 				target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
 				if (target.length) {
+					ga('send', 'event', {eventCategory: 'Navigation', eventAction: 'Click', eventLabel: dest});
 					var offset = target.offset().top - 54;
 					if (scroll != offset) {
 						$('html, body').stop().animate({
@@ -62,16 +71,22 @@
 			}
 		});
 
-		$('a[href="#"]').click(function(e){
+		$('a[href="#"]').click(function(e) {
 			e.preventDefault();
 		});
 
 		$('.contact').prettyValidate();
 
-		$('.highlight').each(function () {
-			var btnHtml = '<div class="bd-clipboard"><span class="btn-clipboard" title="Copy to clipboard">Copy</span></div>';
-			$(this).before(btnHtml);
-			$('.btn-clipboard').tooltip();
+		$('.highlight').each(function() {
+			var btnHtml = '<div class="bd-clipboard"><span class="btn-clipboard" title="Copy to clipboard"><i class="fa fa-clipboard"></i></span></div>';
+			$(this).prepend(btnHtml);
+			$('.btn-clipboard').tooltip({placement: 'left'});
+		});
+		
+		$('.highlight pre code').on('scroll', function() {
+			var math = $(this).get(0).scrollWidth - $(this).scrollLeft() - 1;
+			if (math <= $(this).innerWidth()) { $(this).parent().removeClass("rightfade"); }
+			else { $(this).parent().addClass("rightfade"); }
 		});
 
 		var clipboard = new Clipboard('.btn-clipboard', {
@@ -80,12 +95,12 @@
 			}
 		});
 
-		clipboard.on('success', function (e) {
+		clipboard.on('success', function(e) {
 			$(e.trigger).attr('title', 'Copied!').tooltip('_fixTitle').tooltip('show').attr('title', 'Copy to clipboard').tooltip('_fixTitle');
 			e.clearSelection();
 		});
 
-		clipboard.on('error', function (e) {
+		clipboard.on('error', function(e) {
 			var fallbackMsg = /Mac/i.test(navigator.userAgent) ? 'Press \u2318 to copy' : 'Press Ctrl-C to copy';
 			$(e.trigger).attr('title', fallbackMsg).tooltip('_fixTitle').tooltip('show').attr('title', 'Copy to clipboard').tooltip('_fixTitle');
 		});
