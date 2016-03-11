@@ -94,6 +94,7 @@
 
 .prettyValidate fieldset .form-control[type="range"]::-webkit-slider-thumb {
 	background: #c0c0c0;
+	border: none;
 	border-radius: 50%;
 	height: 15px;
 	margin-top: -5px;
