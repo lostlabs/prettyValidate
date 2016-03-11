@@ -42,6 +42,7 @@
 }
 
 .prettyValidate fieldset .form-control[type="color"] {
+	font-size: 0;
 	height: 42px;
 	margin: -1px;
 	padding: 0;
@@ -52,7 +53,6 @@
 	bottom: 6px;
 	color: rgba(0, 0, 0, 0.32);
 	font-size: 14px;
-	font-weight: bold;
 	left: 15px;
 	line-height: 28px;
 	padding: 0;
