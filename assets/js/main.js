@@ -8,7 +8,7 @@
 	function resize() {
 		$('.row.full-height').each(function (){
 			if ($(window).width() > em(34)) {
-				$('.row.full-height').css("min-height", $(window).height() - 54);
+				$('.row.full-height').css("height", $(window).height() - 54);
 				setTimeout(function(){
 					$('.center-vertical').each(function() {
 						$(this).css({
@@ -20,6 +20,8 @@
 			} else {
 				$('.row.full-height').removeAttr("style");
 				$('.center-vertical').removeAttr("style");
+				$(".row#top > div:first-child").removeAttr("style");
+				$(".row#contact > #googlemaps").removeAttr("style");
 			}
 		});
 		$('.highlight pre code').each(function() {
@@ -27,10 +29,27 @@
 			else { $(this).parent().removeClass("rightfade"); }
 		});
 	}
+	
+	function parallax() {
+		var scrollTop = $(window).scrollTop();
+		var scrollBot = $(window).scrollTop() + $(window).outerHeight();
+		if ($(window).width() > em(34)) {
+			if (scrollTop <= $(".row#top").outerHeight() + $(".row#top").position().top) {
+				$(".row#top > div:first-child").css("margin-top", scrollTop/3 + "px");
+			}
+			if (scrollBot >= $(".row#contact").position().top) {
+				$(".row#contact > #googlemaps").css("margin-top", scrollTop/4 - 400 + "px");
+			}
+		} else {
+			$(".row#top > div:first-child").removeAttr("style");
+			$(".row#contact > #googlemaps").removeAttr("style");
+		}
+	}
 
 	$(document).ready(function () {
 		
 		$(window).on('resize load', function() { resize(); });
+		$(window).on('scroll', function() { parallax(); });
 		
 		anchors.add('#usage h1');
 		anchors.add('#usage h4');
@@ -42,15 +61,7 @@
 			hljs.highlightBlock(block);
 		});
 		
-		$('.validation').prettyValidate({
-			valid: function() {
-				var form = $('form.validation').serialize();
-				alert(form);
-			},
-			invalid: function() {
-				// alert("Error Callback");
-			}
-		});
+		$('.validation').prettyValidate();
 
 		$('a[href*="#"]:not([href="#"]):not(.anchorjs-link)').click(function(e) {
 			if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
