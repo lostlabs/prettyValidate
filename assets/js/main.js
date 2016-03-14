@@ -1,3 +1,14 @@
+// NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
+// IT'S ALL JUST JUNK FOR OUR DOCS!
+// ++++++++++++++++++++++++++++++++++++++++++
+
+/*!
+ * JavaScript for prettyValidates's docs (http://lostlabs.github.com/prettyValidate/)
+ * Copyright 2016 Lost Labs
+ * Licensed under the Creative Commons Attribution 3.0 Unported License. For
+ * details, see https://creativecommons.org/licenses/by/3.0/.
+ */
+
 !function ($) {
 			   
 	function em(input) {
