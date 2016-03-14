@@ -1,3 +1,10 @@
+/*!
+ * prettyValidate v0.8.8-beta (http://lostlabs.github.com/prettyValidate/)
+ * Copyright 2016 Lost Labs
+ * Licensed under the Creative Commons Attribution 3.0 Unported License. For
+ * details, see https://creativecommons.org/licenses/by/3.0/.
+ */
+
 function validateText(text) {
 	var pattern = /^[a-zA-Z ]*$/;
 	return pattern.test(text);
