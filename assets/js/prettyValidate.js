@@ -30,6 +30,16 @@ function validatePhone(phone) {
 	return pattern.test(phone);
 }
 
+function validateColor(color) {
+	var pattern = /^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/;
+	return pattern.test(color);
+}
+
+function validateDate(date) {
+	var pattern = /^((0?[13578]|10|12)(-|\/)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$/;
+	return pattern.test(date);
+}
+
 function valid(input) {
 	input.removeClass("form-control-danger form-control-warning");
 	input.addClass("form-control-success");
@@ -76,18 +86,16 @@ function empty(input) {
 			
 			// Load Color Field
 			$('.form-control[type="color"]', this).each(function() {
-				var label = $(this).attr("placeholder");
-				$('<label for="color"><i class="fa fa-paint-brush"></i> '+ label +'</label>').insertAfter(this);
-				$(this).colourBrightness();
-			});
-			
-			// onChange Color Field
-			$('.form-control[type="color"]', this).on('input', function() {
-				var color = $(this).val();
-				var icon = '<i class="fa fa-paint-brush"></i>';
-				var contents = icon +" "+ color;
-				$(this).css('background-color', color).next().html(contents).find("i").css('color', color);
-				$(this).colourBrightness();
+				$('<label for="' + $(this).attr("name") + '"><i class="fa fa-paint-brush"></i></label>').insertAfter(this);
+				$(this).addClass('color').attr('type','text').colourBrightness();
+				$(this).colorpicker({
+					align: 'left',
+					container: $(this).parent(),
+					format: 'hex'
+				}).on('changeColor', function() {
+					$(this).css('background-color', $(this).val());
+					$(this).colourBrightness();
+				});
 			});
 			
 			// Load Range Field
@@ -105,14 +113,22 @@ function empty(input) {
 				var maxWidth = $(this).parent().find("label.max").outerWidth();
 				var width = minWidth + maxWidth + 20;
 				$(this).css({width: "calc(100% - "+ width +"px)", marginLeft: minWidth + 10});
+				$(this).on('input', function() {
+					var val = $(this).val();
+					if ($(this).attr("placeholder")) {
+						$(this).parent().find("label.value").html(val);
+					}
+				});
 			});
 			
-			// onChange Range Field
-			$('.form-control[type="range"]', this).on('input', function() {
-				var val = $(this).val();
-				if ($(this).attr("placeholder")) {
-					$(this).parent().find("label.value").html(val);
-				}
+			// Load Date Field
+			$('.form-control[type="date"]', this).each(function() {
+				$('<label for="' + $(this).attr("name") + '"><i class="fa fa-calendar"></i></label>').insertAfter(this);
+				$(this).addClass('date').attr('type','text');
+				$(this).datepicker({
+					autoclose: true,
+					container: $(this).parent()
+				});
 			});
 			
 			// Submit Form
@@ -124,11 +140,18 @@ function empty(input) {
 				input.each(function() {
 					if ($(this).hasClass('required') || this.value) {
 						if (!this.value) { empty($(this)); error++; }
-						else if ($(this).attr("type") == "text" && !validateText($(this).val())) { invalid($(this)); error++; }
+						else if (
+							!$(this).hasClass("date") &&
+							!$(this).hasClass("color") &&
+							$(this).attr("type") == "text" &&
+							!validateText($(this).val())
+						) { invalid($(this)); error++; }
 						else if ($(this).attr("type") == "number" && !validateNumber($(this).val())) { invalid($(this)); error++; }
 						else if ($(this).attr("type") == "email" && !validateEmail($(this).val())) { invalid($(this)); error++; }
 						else if ($(this).attr("type") == "phone" && !validatePhone($(this).val())) { invalid($(this)); error++; }
 						else if ($(this).attr("type") == "range") {}
+						else if ($(this).hasClass("color") && !validateColor($(this).val())) { invalid($(this)); error++; }
+						else if ($(this).hasClass("date") && !validateDate($(this).val())) { invalid($(this)); error++; }
 						else if ($(this).is("textarea") && !validateNoHTML($(this).val())) { invalid($(this)); error++; }
 						else { valid($(this)); }
 					}
@@ -171,9 +194,8 @@ function empty(input) {
 			$(this).on('reset', function() {
 				$("input, textarea", this).each(function() {
 					$(this).removeClass("form-control-danger form-control-warning form-control-success");
-					if($(this).attr("type") == "color") {
-						var label = $(this).attr("placeholder");
-						$(this).removeClass("dark light").next().html('<i class="fa fa-paint-brush"></i> '+ label);
+					if($(this).hasClass("color")) {
+						$(this).removeClass("dark light").removeAttr("style");
 					}
 				});
 				$(this).find("fieldset").removeClass("has-danger has-warning has-success shake");
@@ -183,11 +205,18 @@ function empty(input) {
 			$("input, textarea", this).on('change keyup blur input', function() {
 				if ($(this).hasClass('required') || this.value) {
 					if (!this.value) { empty($(this)); }
-					else if ($(this).attr("type") == "text" && !validateText($(this).val())) { invalid($(this)); }
+					else if (
+						!$(this).hasClass("date") &&
+						!$(this).hasClass("color") &&
+						$(this).attr("type") == "text" &&
+						!validateText($(this).val())
+					) { invalid($(this)); }
 					else if ($(this).attr("type") == "number" && !validateNumber($(this).val())) { invalid($(this)); }
 					else if ($(this).attr("type") == "email" && !validateEmail($(this).val())) { invalid($(this)); }
 					else if ($(this).attr("type") == "phone" && !validatePhone($(this).val())) { invalid($(this)); }
 					else if ($(this).attr("type") == "range") {}
+					else if ($(this).hasClass("color") && !validateColor($(this).val())) { invalid($(this)); }
+					else if ($(this).hasClass("date") && !validateDate($(this).val())) { invalid($(this)); }
 					else if ($(this).is("textarea") && !validateNoHTML($(this).val())) { invalid($(this)); }
 					else { valid($(this)); }
 				} else {

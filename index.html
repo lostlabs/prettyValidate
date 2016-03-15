@@ -7,6 +7,8 @@
 		<title>prettyValidate for jQuery &amp; Bootstrap</title>
 		<link rel="icon" href="assets/ico/favicon.ico">
 		<link rel="stylesheet" href="assets/css/bootstrap.css">
+		<link rel="stylesheet" href="assets/css/bootstrap-colorpicker.css">
+		<link rel="stylesheet" href="assets/css/bootstrap-datepicker.css">
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/prettyValidate.css">
 		<link rel="stylesheet" href="assets/css/github.css">
@@ -29,6 +31,7 @@
 				<ul class="nav navbar-nav pull-sm-right">
 					<li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+					<li class="nav-item"><a class="nav-link" href="#demo">Demo</a></li>
 					<li class="nav-item"><a class="nav-link" href="#usage">Usage</a></li>
 					<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 				</ul>
@@ -47,8 +50,9 @@
 						<fieldset class="form-group"><input type="text" class="form-control required" name="lastname" placeholder="Last Name"></fieldset>
 						<fieldset class="form-group"><input type="email" class="form-control required" name="email" placeholder="Email"></fieldset>
 						<fieldset class="form-group"><input type="phone" class="form-control required" name="phone" placeholder="Phone Number"></fieldset>
-						<fieldset class="form-group"><input type="color" class="form-control" name="color" value="#FFFFFF" placeholder="Color"></fieldset>
-						<fieldset class="form-group"><input type="range" class="form-control" name="range" value="0"></fieldset>
+						<fieldset class="form-group"><input type="color" class="form-control required" name="color" placeholder="#FFFFFF"></fieldset>
+						<fieldset class="form-group"><input type="date" class="form-control required" name="date" placeholder="MM/DD/YYYY"></fieldset>
+						<fieldset class="form-group"><input type="range" class="form-control" name="range" value="0" placeholder="Range"></fieldset>
 						<fieldset class="form-group"><textarea class="form-control required" placeholder="Textarea" rows="2"></textarea></fieldset>
 						<div class="description"><span>*</span> = Required</div>
 						<div class="btn-group">
@@ -57,7 +61,6 @@
 						</div>
 					</form>
 				</div>
-				<div class="fade primary"></div>
 				<a href="#features" class="next bottom dark hidden-xs-down">next<span></span>page</a>
 			</section>
 			<section class="row" id="features">
@@ -77,6 +80,26 @@
 						<h4>Configurable</h4>
 						<p>prettyValidate is customizable in any way you can think of. From how the form is submitted, to what happens before or after the fields are validated, to callbacks from any errors it encounters.</p>
 					</div>
+				</div>
+			</section>
+			<section class="row" id="demo">
+				<div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xl-offset-4">
+					<form class="validation">
+						<h5>Demo Form</h5><div class="line"></div>
+						<fieldset class="form-group"><input type="text" class="form-control required" name="firstname" placeholder="First Name"></fieldset>
+						<fieldset class="form-group"><input type="text" class="form-control required" name="lastname" placeholder="Last Name"></fieldset>
+						<fieldset class="form-group"><input type="email" class="form-control required" name="email" placeholder="Email"></fieldset>
+						<fieldset class="form-group"><input type="phone" class="form-control required" name="phone" placeholder="Phone Number"></fieldset>
+						<fieldset class="form-group"><input type="color" class="form-control required" name="color" placeholder="#FFFFFF"></fieldset>
+						<fieldset class="form-group"><input type="date" class="form-control required" name="date" placeholder="MM/DD/YYYY"></fieldset>
+						<fieldset class="form-group"><input type="range" class="form-control" name="range" value="0" placeholder="Range"></fieldset>
+						<fieldset class="form-group"><textarea class="form-control required" placeholder="Textarea" rows="2"></textarea></fieldset>
+						<div class="description"><span>*</span> = Required</div>
+						<div class="btn-group">
+							<button type="submit" class="btn btn-primary">Submit Form</button>
+							<button type="reset" class="btn">Reset</button>
+						</div>
+					</form>
 				</div>
 			</section>
 			<section class="row" id="usage">
@@ -172,6 +195,8 @@ $("#form").prettyValidate({
 		<script type="text/javascript" src="assets/js/anchor.min.js"></script>
 		<script type="text/javascript" src="assets/js/tether.min.js"></script>
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+		<script type="text/javascript" src="assets/js/bootstrap-colorpicker.js"></script>
+		<script type="text/javascript" src="assets/js/bootstrap-datepicker.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.colourbrightness.min.js"></script>
 		<script type="text/javascript" src="assets/js/prettyValidate.js"></script>
 		<script type="text/javascript" src="assets/js/highlight.js"></script>
