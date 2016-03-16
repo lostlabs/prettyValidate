@@ -102,6 +102,9 @@ p.small {color: #bbb;}
 
 /* Main Navigation Styling */
 
+#nav {transition: background 0.2s;}
+#nav.bg-demo {background: #ccc;}
+#nav.bg-contact {background: rgba(0,0,0,0.3);}
 #nav ::selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
 #nav ::-moz-selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
 #nav .navbar-brand i {margin: 0 8px 0 0;}
@@ -157,7 +160,7 @@ div[class*='col-'] > *:last-child {
 .row > .prev {
 	font-size: 14px;
 	font-weight: bold;
-	left: calc(50% - 110px);
+	left: calc(50% - 120px);
 	line-height: 20px;
 	opacity: 0.5;
 	position: absolute;
@@ -168,7 +171,7 @@ div[class*='col-'] > *:last-child {
 		opacity .2s,
 		transform .1s;
 	vertical-align: middle;
-	width: 220px;
+	width: 240px;
 	z-index: 1;
 }
 .row > .next {bottom: 20px;}
@@ -284,7 +287,7 @@ div[class*='col-'] > *:last-child {
 	top: 0;
 }
 @media (min-width: 34em) {
-	.row#top {padding: 5% 0 0 0; z-index: 0;}
+	.row#top {padding: 10% 0 0 0; z-index: 0;}
 	.row#top h1.title span {margin-top: 0;}
 	.row#top .center-vertical {margin-top: -27px;}
 	.row#top .validation {padding: 30px 15%;}
@@ -295,7 +298,6 @@ div[class*='col-'] > *:last-child {
 
 .row#features {
 	background-color: #f7f7f9;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 	text-align: center;
 }
 .row#features i.fa {
@@ -334,7 +336,7 @@ div[class*='col-'] > *:last-child {
 
 /* ============ DEMO ============ */
 
-.row#demo {overflow: hidden; background: #555;}
+.row#demo {overflow: hidden; background: #ccc;}
 .row#demo ::selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
 .row#demo ::-moz-selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
 .row#demo .validation {
@@ -343,8 +345,46 @@ div[class*='col-'] > *:last-child {
 	padding: 30px 20px 20px;
 	position: relative;
 }
+.row#demo .parallax {
+	bottom: 0;
+	left: 50%;
+	margin-left: -1500px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.row#demo .parallax_layer {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	bottom: 0;
+	height: 455px;
+	position: absolute;
+	width: 3000px;
+}
+
+.row#demo .parallax_layer_0 {background-image: url(/assets/img/layer0.png);}
+.row#demo .parallax_layer_1 {background-image: url(/assets/img/layer1.png);}
+.row#demo .parallax_layer_2 {background-image: url(/assets/img/layer2.png);}
+.row#demo .parallax_layer_3 {background-image: url(/assets/img/layer3.png);}
+.row#demo .parallax_layer_4 {background-image: url(/assets/img/layer4.png);}
+.row#demo .parallax_layer_5 {background-image: url(/assets/img/layer5.png);}
+.row#demo .parallax_layer_6 {background-image: url(/assets/img/layer6.png);}
+
 @media (min-width: 34em) {
+	.row#demo {padding: 0;}
 	.row#demo .validation {padding: 30px 15%;}
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+	.row#demo .parallax_layer_0 {background-image: url(/assets/img/layer0@2x.png);}
+	.row#demo .parallax_layer_1 {background-image: url(/assets/img/layer1@2x.png);}
+	.row#demo .parallax_layer_2 {background-image: url(/assets/img/layer2@2x.png);}
+	.row#demo .parallax_layer_3 {background-image: url(/assets/img/layer3@2x.png);}
+	.row#demo .parallax_layer_4 {background-image: url(/assets/img/layer4@2x.png);}
+	.row#demo .parallax_layer_5 {background-image: url(/assets/img/layer5@2x.png);}
+	.row#demo .parallax_layer_6 {background-image: url(/assets/img/layer6@2x.png);}
 }
 
 
@@ -371,9 +411,9 @@ div[class*='col-'] > *:last-child {
 	width: 100%;
 }
 .row#contact #googlemaps {
-	bottom: 0;
+	bottom: -100px;
 	height: auto;
-	top: 0;
+	top: -100px;
 }
 .row#contact #mapoverlay {background: rgba(0, 0, 0, 0.3);}
 .row#contact .contact {

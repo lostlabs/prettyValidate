@@ -62,8 +62,10 @@
 	border-radius: 50%;
 	height: 15px;
 	margin-top: -5px;
+	transition: transform 0.1s;
 	width: 15px;
 	-webkit-appearance: none;
+			appearance: none;
 }
 
 .prettyValidate fieldset .form-control[type="range"]::-webkit-slider-runnable-track {
@@ -74,7 +76,7 @@
 	width: 100%;
 }
 
-.prettyValidate fieldset .form-control[type="range"]:active::-webkit-slider-thumb {background: #b0b0b0;}
+.prettyValidate fieldset .form-control[type="range"]:active::-webkit-slider-thumb {background: #b0b0b0; transform: scale(1.1);}
 
 .prettyValidate fieldset .form-control.color,
 .prettyValidate fieldset .form-control.date {padding-left: 43px;}

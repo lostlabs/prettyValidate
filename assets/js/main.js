@@ -20,14 +20,12 @@
 		$('.row.full-height').each(function (){
 			if ($(window).width() > em(34)) {
 				$('.row.full-height').css("height", $(window).height() - $("#nav").outerHeight());
-				setTimeout(function(){
-					$('.center-vertical').each(function() {
-						$(this).css({
-							position: "absolute",
-							top: ($(this).closest("section").height() - $(this).outerHeight()) / 2
-						});
+				$('.center-vertical').each(function() {
+					$(this).css({
+						position: "absolute",
+						top: ($(this).closest("section").height() - $(this).outerHeight()) / 2
 					});
-				}, 100);
+				});
 			} else {
 				$('.row.full-height').removeAttr("style");
 				$('.center-vertical').removeAttr("style");
@@ -45,22 +43,46 @@
 	function parallax() {
 		var scrollTop = $(window).scrollTop(),
 			scrollBot = $(window).scrollTop() + $(window).outerHeight();
-		if ($(window).width() > em(34)) {
-			$(".row#top").each(function() {
-				if (scrollTop <= $(this).outerHeight() + $(this).position().top) {
-					var position = scrollTop * 0.2;
-					$("div:first-child", this).css({'transform': 'translate3d(0, ' + position + 'px, 0)'});
-				}
-			});
-			$(".row#contact").each(function() {
-				if (scrollBot >= $(this).position().top) {
-					var position = (scrollTop - $(this).position().top + $("#nav").outerHeight()) * 0.2;
-					$("#googlemaps", this).css({'transform': 'translate3d(0, ' + position + 'px, 0)'});
-				}
-			});
+		$(".row#top").each(function() {
+			if (scrollTop <= $(this).outerHeight() + $(this).position().top) {
+				var position = scrollTop * 0.3;
+				$("div:first-child", this).css({'transform': 'translate3d(0, ' + position + 'px, 0)'});
+			}
+		});
+		$(".row#demo").each(function() {
+			if (scrollBot >= $(this).position().top && scrollTop <= $(this).position().top + $(this).outerHeight()) {
+				var position = scrollBot - $(this).position().top - ($(this).outerHeight() * 0.8);
+				$(".parallax > .parallax_layer_0", this).css({'transform': 'translateY(' + position * 0.4 + 'px)'});
+				$(".parallax > .parallax_layer_1", this).css({'transform': 'translateY(' + position * 0.35 + 'px)'});
+				$(".parallax > .parallax_layer_2", this).css({'transform': 'translateY(' + position * 0.3 + 'px)'});
+				$(".parallax > .parallax_layer_3", this).css({'transform': 'translateY(' + position * 0.25 + 'px)'});
+				$(".parallax > .parallax_layer_4", this).css({'transform': 'translateY(' + position * 0.2 + 'px)'});
+				$(".parallax > .parallax_layer_5", this).css({'transform': 'translateY(' + position * 0.1 + 'px)'});
+			}
+		});
+		$(".row#contact").each(function() {
+			if (scrollBot >= $(this).position().top) {
+				var position = (scrollTop - $(this).position().top + $("#nav").outerHeight()) * 0.3;
+				$("#googlemaps", this).css({'transform': 'translate3d(0, ' + position + 'px, 0)'});
+			}
+		});
+	}
+	
+	function navColor() {
+		var scroll = $(window).scrollTop(), nav = $("#nav").outerHeight() + 1,
+			tPos = $(".row#top").position().top, tHeight = $(".row#top").outerHeight(),
+			dPos = $(".row#demo").position().top, dHeight = $(".row#demo").outerHeight(),
+			cPos = $(".row#contact").position().top, cHeight = $(".row#contact").outerHeight(),
+			top = scroll <= tHeight - 1,
+			demo = scroll >= dPos - nav && scroll <= dPos + dHeight - nav,
+			contact = scroll >= cPos - nav && scroll <= cPos + cHeight - nav;
+		if (top || demo || contact) {
+			$("#nav").removeClass("bg-primary");
+			if (scroll >= dPos - nav && scroll <= dPos) { $("#nav").addClass("bg-demo"); }
+			else if (scroll >= cPos - nav && scroll <= cPos) { $("#nav").addClass("bg-contact"); }
+			else { $("#nav").removeClass("bg-demo bg-contact"); }
 		} else {
-			$(".row#top > div:first-child").removeAttr("style");
-			$(".row#contact > #googlemaps").removeAttr("style");
+			$("#nav").addClass("bg-primary").removeClass("bg-demo bg-contact");
 		}
 	}
 
@@ -68,8 +90,8 @@
 		
 		$(window).on('resize load', function() {
 			parallax(); resize();
-		}).on('scroll', function() {
-			parallax();
+		}).on('scroll load', function() {
+			parallax(); navColor();
 		});
 		
 		$("body").css("padding-top", $("#nav").outerHeight());
@@ -84,7 +106,12 @@
 			hljs.highlightBlock(block);
 		});
 		
-		$('.validation').prettyValidate();
+		$('.validation').prettyValidate({
+			valid: function(){
+				event.preventDefault();
+				alert($(this).serialize());
+			}
+		});
 
 		$('a[href*="#"]:not([href="#"]):not(.anchorjs-link)').click(function(e) {
 			if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
