@@ -365,26 +365,26 @@ div[class*='col-'] > *:last-child {
 	width: 3000px;
 }
 
-.row#demo .parallax_layer_0 {background-image: url(/assets/img/layer0.png);}
-.row#demo .parallax_layer_1 {background-image: url(/assets/img/layer1.png);}
-.row#demo .parallax_layer_2 {background-image: url(/assets/img/layer2.png);}
-.row#demo .parallax_layer_3 {background-image: url(/assets/img/layer3.png);}
-.row#demo .parallax_layer_4 {background-image: url(/assets/img/layer4.png);}
-.row#demo .parallax_layer_5 {background-image: url(/assets/img/layer5.png);}
-.row#demo .parallax_layer_6 {background-image: url(/assets/img/layer6.png);}
+.row#demo .parallax_layer_0 {background-image: url(../img/layer0.png);}
+.row#demo .parallax_layer_1 {background-image: url(../img/layer1.png);}
+.row#demo .parallax_layer_2 {background-image: url(../img/layer2.png);}
+.row#demo .parallax_layer_3 {background-image: url(../img/layer3.png);}
+.row#demo .parallax_layer_4 {background-image: url(../img/layer4.png);}
+.row#demo .parallax_layer_5 {background-image: url(../img/layer5.png);}
+.row#demo .parallax_layer_6 {background-image: url(../img/layer6.png);}
 
 @media (min-width: 34em) {
 	.row#demo {padding: 0;}
 	.row#demo .validation {padding: 30px 15%;}
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-	.row#demo .parallax_layer_0 {background-image: url(/assets/img/layer0@2x.png);}
-	.row#demo .parallax_layer_1 {background-image: url(/assets/img/layer1@2x.png);}
-	.row#demo .parallax_layer_2 {background-image: url(/assets/img/layer2@2x.png);}
-	.row#demo .parallax_layer_3 {background-image: url(/assets/img/layer3@2x.png);}
-	.row#demo .parallax_layer_4 {background-image: url(/assets/img/layer4@2x.png);}
-	.row#demo .parallax_layer_5 {background-image: url(/assets/img/layer5@2x.png);}
-	.row#demo .parallax_layer_6 {background-image: url(/assets/img/layer6@2x.png);}
+	.row#demo .parallax_layer_0 {background-image: url(../img/layer0@2x.png);}
+	.row#demo .parallax_layer_1 {background-image: url(../img/layer1@2x.png);}
+	.row#demo .parallax_layer_2 {background-image: url(../img/layer2@2x.png);}
+	.row#demo .parallax_layer_3 {background-image: url(../img/layer3@2x.png);}
+	.row#demo .parallax_layer_4 {background-image: url(../img/layer4@2x.png);}
+	.row#demo .parallax_layer_5 {background-image: url(../img/layer5@2x.png);}
+	.row#demo .parallax_layer_6 {background-image: url(../img/layer6@2x.png);}
 }
 
 
