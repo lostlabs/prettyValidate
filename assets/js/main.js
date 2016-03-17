@@ -19,11 +19,20 @@
 	function resize() {
 		$('.row.full-height').each(function (){
 			if ($(window).width() > em(34)) {
-				$('.row.full-height').css("height", $(window).height() - $("#nav").outerHeight());
+				$('.row.full-height').css({height: $(window).height() - $("#nav").outerHeight()});
 				$('.center-vertical').each(function() {
-					$(this).css({
-						position: "absolute",
-						top: ($(this).closest("section").height() - $(this).outerHeight()) / 2
+					var section = $(this).closest("section"),
+						position = section.height() - $(this).outerHeight();
+					$(this).css({position: "absolute", top: position / 2});
+					section.find(".prev").each(function() {
+						var pagenav = (position - ($(this).outerHeight() / 4)) / 4;
+						if (pagenav < 40) { $(this).css({top: pagenav}); }
+						else { $(this).removeAttr("style"); }
+					});
+					section.find(".next").each(function() {
+						var pagenav = (position - ($(this).outerHeight() / 4)) / 4;
+						if (pagenav < 40) { $(this).css({bottom: pagenav}); }
+						else { $(this).removeAttr("style"); }
 					});
 				});
 			} else {
@@ -46,24 +55,28 @@
 		$(".row#top").each(function() {
 			if (scrollTop <= $(this).outerHeight() + $(this).position().top) {
 				var position = scrollTop * 0.3;
-				$("div:first-child", this).css({'transform': 'translate3d(0, ' + position + 'px, 0)'});
+				$("div:first-child", this).css({transform: 'translate3d(0, ' + position + 'px, 0)'});
 			}
 		});
 		$(".row#demo").each(function() {
 			if (scrollBot >= $(this).position().top && scrollTop <= $(this).position().top + $(this).outerHeight()) {
-				var position = scrollBot - $(this).position().top - ($(this).outerHeight() * 0.8);
-				$(".parallax > .parallax_layer_0", this).css({'transform': 'translateY(' + position * 0.4 + 'px)'});
-				$(".parallax > .parallax_layer_1", this).css({'transform': 'translateY(' + position * 0.35 + 'px)'});
-				$(".parallax > .parallax_layer_2", this).css({'transform': 'translateY(' + position * 0.3 + 'px)'});
-				$(".parallax > .parallax_layer_3", this).css({'transform': 'translateY(' + position * 0.25 + 'px)'});
-				$(".parallax > .parallax_layer_4", this).css({'transform': 'translateY(' + position * 0.2 + 'px)'});
-				$(".parallax > .parallax_layer_5", this).css({'transform': 'translateY(' + position * 0.1 + 'px)'});
+				var position = scrollBot - $(this).position().top - ($(this).outerHeight() * 1);
+				$(".mountains > .mountain_layer_0", this).css({transform: 'translateY(' + position * 0.55 + 'px)'});
+				$(".mountains > .mountain_layer_1", this).css({transform: 'translateY(' + position * 0.5 + 'px)'});
+				$(".mountains > .mountain_layer_2", this).css({transform: 'translateY(' + position * 0.4 + 'px)'});
+				$(".mountains > .mountain_layer_3", this).css({transform: 'translateY(' + position * 0.3 + 'px)'});
+				$(".mountains > .mountain_layer_4", this).css({transform: 'translateY(' + position * 0.2 + 'px)'});
+				$(".mountains > .mountain_layer_5", this).css({transform: 'translateY(' + position * 0.1 + 'px)'});
 			}
 		});
 		$(".row#contact").each(function() {
 			if (scrollBot >= $(this).position().top) {
-				var position = (scrollTop - $(this).position().top + $("#nav").outerHeight()) * 0.3;
-				$("#googlemaps", this).css({'transform': 'translate3d(0, ' + position + 'px, 0)'});
+				var position = scrollTop - $(this).position().top + $("#nav").outerHeight();
+				$("#googlemaps", this).css({'transform': 'translate3d(0, ' + position * 0.4 + 'px, 0)'});
+				$(".clouds > .cloud_layer_0", this).css({'transform': 'translateY(' + position * 0.2 + 'px)'});
+				$(".clouds > .cloud_layer_1", this).css({'transform': 'translateY(' + position * 0.3 + 'px)'});
+				$(".clouds > .cloud_layer_2", this).css({'transform': 'translateY(' + position * 0.25 + 'px)'});
+				$(".clouds > .cloud_layer_3", this).css({'transform': 'translateY(' + position * 0.25 + 'px)'});
 			}
 		});
 	}
@@ -75,18 +88,19 @@
 			cPos = $(".row#contact").position().top, cHeight = $(".row#contact").outerHeight(),
 			top = scroll <= tHeight - 1,
 			demo = scroll >= dPos - nav && scroll <= dPos + dHeight - nav,
-			contact = scroll >= cPos - nav && scroll <= cPos + cHeight - nav;
+			contact = scroll >= cPos && scroll <= cPos + cHeight - nav;
 		if (top || demo || contact) {
 			$("#nav").removeClass("bg-primary");
 			if (scroll >= dPos - nav && scroll <= dPos) { $("#nav").addClass("bg-demo"); }
-			else if (scroll >= cPos - nav && scroll <= cPos) { $("#nav").addClass("bg-contact"); }
-			else { $("#nav").removeClass("bg-demo bg-contact"); }
+			else { $("#nav").removeClass("bg-demo"); }
 		} else {
-			$("#nav").addClass("bg-primary").removeClass("bg-demo bg-contact");
+			$("#nav").addClass("bg-primary").removeClass("bg-demo");
 		}
 	}
 
 	$(document).ready(function () {
+		
+		// BASIC FUNCTIONS
 		
 		$(window).on('resize load', function() {
 			parallax(); resize();
@@ -96,22 +110,7 @@
 		
 		$("body").css("padding-top", $("#nav").outerHeight());
 		
-		anchors.add('#usage h1');
-		anchors.add('#usage h4');
-		
 		$('[data-toggle="tooltip"]').tooltip();
-		
-		hljs.configure({ tabReplace: '    ' });
-		$('figure code').each(function(i, block) {
-			hljs.highlightBlock(block);
-		});
-		
-		$('.validation').prettyValidate({
-			valid: function(){
-				event.preventDefault();
-				alert($(this).serialize());
-			}
-		});
 
 		$('a[href*="#"]:not([href="#"]):not(.anchorjs-link)').click(function(e) {
 			if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -130,11 +129,73 @@
 			}
 		});
 
-		$('a[href="#"]').click(function(e) {
-			e.preventDefault();
+		$('a[href="#"]').click(function(e) { e.preventDefault(); });
+		
+		
+		// TOP SECTION SCRIPTS
+		
+		$('.validation').prettyValidate();
+		
+		
+		// DEMO SECTION SCRIPTS
+		
+		$('.demo').prettyValidate({
+			valid: function(){
+				event.preventDefault();
+				alert($(this).serialize());
+			}
 		});
-
-		$('.contact').prettyValidate();
+		
+		$(".demo input[name='name']").popover({ html: true, placement: 'left', trigger: 'focus',
+			title: 'Text Validation',
+			content: 'Text inputs will only accept letters.<br>It will show an error if any numbers or symbols are found.'
+		});
+		
+		$(".demo input[name='email']").popover({ html: true, placement: 'right', trigger: 'focus',
+			title: 'Email Validation',
+			content: 'Accepts only properly formatted email addresses, ex: <a href="#">email@address.com</a>'
+		});
+		
+		$(".demo input[name='phone']").popover({ html: true, placement: 'left', trigger: 'focus',
+			title: 'Phone Number Validation',
+			content: 'Accepts US formated phone numbers, ex: <code>5555555555</code>, <code>555-555-5555</code>, <code>555 555 5555</code>'
+		});
+		
+		$(".demo input[name='color']").popover({ html: true, placement: 'right', trigger: 'focus',
+			title: 'Bootstrap Colorpicker',
+			content: 'prettyValidate uses <a href="http://mjolnic.com/bootstrap-colorpicker/" target="_blank">Bootstrap Colorpicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="http://github.com/mjolnic" target="_blank">Javier Aguilar</a>.'
+		});
+		
+		$(".demo input[name='date']").popover({ html: true, placement: 'left', trigger: 'focus',
+			title: 'Bootstrap Datepicker',
+			content: 'prettyValidate uses <a href="http://bootstrap-datepicker.readthedocs.org/en/latest/" target="_blank">Bootstrap Datepicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="https://github.com/eternicode" target="_blank">Andrew Rowls</a>.'
+		});
+		
+		$(".demo input[name='range']").popover({ html: true, offset: '13 -30', placement: 'right', trigger: 'focus',
+			title: 'A Pretty Range',
+			content: 'The value can be displayed by adding the <code>placeholder=""</code> attribute.'
+		});
+		
+		$(".demo textarea").popover({ html: true, placement: 'left', trigger: 'focus',
+			title: 'Textarea Validation',
+			content: 'Accepts all charachters but will return an error if any <code>HTML</code> has been detected.'
+		});
+		
+		$(".row#demo .walkthrough").click(function() {
+			$(this).attr("disabled", true);
+			$(".demo input[name='name']").focus();
+		});
+		
+		
+		// USAGE SECTION SCRIPTS
+		
+		anchors.add('#usage h1');
+		anchors.add('#usage h4');
+		
+		hljs.configure({ tabReplace: '    ' });
+		$('figure code').each(function(i, block) {
+			hljs.highlightBlock(block);
+		});
 
 		$('.highlight').each(function() {
 			var btnHtml = '<div class="bd-clipboard"><span class="btn-clipboard" title="Copy to clipboard"><i class="fa fa-clipboard"></i></span></div>';
@@ -163,6 +224,11 @@
 			var fallbackMsg = /Mac/i.test(navigator.userAgent) ? 'Press \u2318 to copy' : 'Press Ctrl-C to copy';
 			$(e.trigger).attr('title', fallbackMsg).tooltip('_fixTitle').tooltip('show').attr('title', 'Copy to clipboard').tooltip('_fixTitle');
 		});
+		
+		
+		// CONTACT SECTION SCRIPTS
+
+		$('.contact').prettyValidate();
 
 		var position = [40.0577919, -75.541693];
 
