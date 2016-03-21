@@ -65,7 +65,6 @@
 	transition: transform 0.1s;
 	width: 15px;
 	-webkit-appearance: none;
-			appearance: none;
 }
 
 .prettyValidate fieldset .form-control[type="range"]::-webkit-slider-runnable-track {

@@ -199,6 +199,12 @@ function empty(input) {
 					}
 				});
 				$(this).find("fieldset").removeClass("has-danger has-warning has-success shake");
+				$('.form-control[type="range"]', this).each(function() {
+					var min = ($(this).attr('min')) ? $(this).attr('min') : 0;
+					if ($(this).attr("placeholder")) {
+						$(this).parent().find("label.value").html(min);
+					}
+				});
 			});
 			
 			// On Input Change

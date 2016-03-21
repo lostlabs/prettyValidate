@@ -146,44 +146,197 @@
 			}
 		});
 		
-		$(".demo input[name='name']").popover({ html: true, placement: 'left', trigger: 'focus',
-			title: 'Text Validation',
-			content: 'Text inputs will only accept letters.<br>It will show an error if any numbers or symbols are found.'
-		});
+		function wtName(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo input[name='name']").popover('dispose').popover({html: true, placement: 'left', trigger: trigger, title: 'Text Validation', content: 'Text inputs will only accept letters.<br>It will show an error if any numbers or symbols are found.'});
+			if (wt == true) {
+				$(".demo input[name='name']").val('John Doe').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var input = $(this),
+						prevbutton = '<button type="button" class="popover-prev btn btn-sm btn-secondary">Prev</button>',
+						nextbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Next</button>';
+					$(prevbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).attr("disabled", true);
+					$(nextbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().next("fieldset").find("input").focus(); wtEmail(wt);
+					});
+				});
+			}
+		}
 		
-		$(".demo input[name='email']").popover({ html: true, placement: 'right', trigger: 'focus',
-			title: 'Email Validation',
-			content: 'Accepts only properly formatted email addresses, ex: <a href="#">email@address.com</a>'
-		});
+		function wtEmail(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo input[name='email']").popover('dispose').popover({html: true, placement: 'right', trigger: trigger, title: 'Email Validation', content: 'Accepts only properly formatted email addresses, ex: <a href="#">email@address.com</a>.'});
+			if (wt == true) {
+				$(".demo input[name='email']").val('john@email.com').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var input = $(this),
+						prevbutton = '<button type="button" class="popover-prev btn btn-sm btn-secondary">Prev</button>',
+						nextbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Next</button>';
+					$(prevbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().prev("fieldset").find("input").focus(); wtName(wt);
+					});
+					$(nextbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().next("fieldset").find("input").focus(); wtPhone(wt);
+					});
+				});
+			}
+		}
 		
-		$(".demo input[name='phone']").popover({ html: true, placement: 'left', trigger: 'focus',
-			title: 'Phone Number Validation',
-			content: 'Accepts US formated phone numbers, ex: <code>5555555555</code>, <code>555-555-5555</code>, <code>555 555 5555</code>'
-		});
+		function wtPhone(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo input[name='phone']").popover('dispose').popover({html: true, placement: 'left', trigger: trigger, title: 'Phone Number Validation', content: 'Accepts US formated phone numbers, ex: <code>5555555555</code>, <code>555-555-5555</code>, <code>555 555 5555</code>.'});
+			if (wt == true) {
+				$(".demo input[name='phone']").val('555-555-5555').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var input = $(this),
+						prevbutton = '<button type="button" class="popover-prev btn btn-sm btn-secondary">Prev</button>',
+						nextbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Next</button>';
+					$(prevbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().prev("fieldset").find("input").focus(); wtEmail(wt);
+					});
+					$(nextbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().next("fieldset").find("input").focus(); wtColor(wt);
+					});
+				});
+			}
+		}
 		
-		$(".demo input[name='color']").popover({ html: true, placement: 'right', trigger: 'focus',
-			title: 'Bootstrap Colorpicker',
-			content: 'prettyValidate uses <a href="http://mjolnic.com/bootstrap-colorpicker/" target="_blank">Bootstrap Colorpicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="http://github.com/mjolnic" target="_blank">Javier Aguilar</a>.'
-		});
+		function wtColor(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo input[name='color']").popover('dispose').popover({html: true, placement: 'right', trigger: trigger, title: 'Bootstrap Colorpicker', content: 'prettyValidate uses <a href="http://mjolnic.com/bootstrap-colorpicker/" target="_blank">Bootstrap Colorpicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="http://github.com/mjolnic" target="_blank">Javier Aguilar</a>.'});
+			if (wt == true) {
+				$(".demo input[name='color']").colorpicker('setValue', '#0275d8').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var input = $(this),
+						prevbutton = '<button type="button" class="popover-prev btn btn-sm btn-secondary">Prev</button>',
+						nextbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Next</button>';
+					$(prevbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().prev("fieldset").find("input").focus(); wtPhone(wt);
+					});
+					$(nextbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().next("fieldset").find("input").focus(); wtDate(wt);
+					});
+				});
+			}
+		}
 		
-		$(".demo input[name='date']").popover({ html: true, placement: 'left', trigger: 'focus',
-			title: 'Bootstrap Datepicker',
-			content: 'prettyValidate uses <a href="http://bootstrap-datepicker.readthedocs.org/en/latest/" target="_blank">Bootstrap Datepicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="https://github.com/eternicode" target="_blank">Andrew Rowls</a>.'
-		});
+		function wtDate(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo input[name='date']").popover('dispose').popover({html: true, placement: 'left', trigger: trigger, title: 'Bootstrap Datepicker', content: 'prettyValidate uses <a href="http://bootstrap-datepicker.readthedocs.org/en/latest/" target="_blank">Bootstrap Datepicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="https://github.com/eternicode" target="_blank">Andrew Rowls</a>.'});
+			if (wt == true) {
+				$(".demo input[name='date']").datepicker('setDate', new Date()).change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var input = $(this),
+						prevbutton = '<button type="button" class="popover-prev btn btn-sm btn-secondary">Prev</button>',
+						nextbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Next</button>';
+					$(prevbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().prev("fieldset").find("input").focus(); wtColor(wt);
+					});
+					$(nextbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().next("fieldset").find("input").focus(); wtRange(wt);
+					});
+				});
+			}
+		}
 		
-		$(".demo input[name='range']").popover({ html: true, offset: '13 -30', placement: 'right', trigger: 'focus',
-			title: 'A Pretty Range',
-			content: 'The value can be displayed by adding the <code>placeholder=""</code> attribute.'
-		});
+		function wtRange(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo input[name='range']").popover('dispose').popover({html: true, offset: '13 -30', placement: 'right', trigger: trigger, title: 'A Pretty Range', content: 'The value can be displayed by adding the <code>placeholder=\"\"</code> attribute.'});
+			if (wt == true) {
+				$(".demo input[name='range']").change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var step = setInterval(function() { var newVal = parseInt($(".demo input[name='range']").val()) + 1; if (newVal <= 50) { $(".demo input[name='range']").val(newVal).parent().find("label.value").html(newVal); } else { clearInterval(step); } }, 15);
+					var input = $(this),
+						prevbutton = '<button type="button" class="popover-prev btn btn-sm btn-secondary">Prev</button>',
+						nextbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Next</button>';
+					$(prevbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().prev("fieldset").find("input").focus(); wtDate(wt);
+					});
+					$(nextbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().next("fieldset").find("input").focus(); wtTextArea(wt);
+					});
+				});
+			}
+		}
 		
-		$(".demo textarea").popover({ html: true, placement: 'left', trigger: 'focus',
-			title: 'Textarea Validation',
-			content: 'Accepts all charachters but will return an error if any <code>HTML</code> has been detected.'
-		});
+		function wtTextArea(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo textarea").popover('dispose').popover({html: true, placement: 'left', trigger: trigger, title: 'Textarea Validation', content: 'Accepts all charachters but will return an error if any <code>HTML</code> has been detected.'});
+			if (wt == true) {
+				$(".demo textarea").val('Some Text').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var input = $(this),
+						prevbutton = '<button type="button" class="popover-prev btn btn-sm btn-secondary">Prev</button>',
+						nextbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Next</button>';
+					$(prevbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().prev("fieldset").find("input").focus(); wtRange(wt);
+					});
+					$(nextbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().next("fieldset").find("input").focus(); wtInputWarning(wt);
+					});
+				});
+			}
+		}
+		
+		function wtInputWarning(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo input[name='name']").popover('dispose').popover({html: true, placement: 'right', trigger: trigger, title: 'Invalid Text', content: 'If an error is found a visual feedback will be shown.'});
+			if (wt == true) {
+				$(".demo input[name='name']").val('John Doe 3').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var input = $(this),
+						prevbutton = '<button type="button" class="popover-prev btn btn-sm btn-secondary">Prev</button>',
+						nextbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Next</button>';
+					$(prevbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().prev("fieldset").find("input").focus(); wtTextArea(wt);
+					});
+					$(nextbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().next("fieldset").find("input").focus(); wtInputError(wt);
+					});
+				});
+			}
+		}
+		
+		function wtInputError(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo input[name='email']").popover('dispose').popover({html: true, placement: 'right', trigger: trigger, title: 'Missing Text', content: 'If the field is left empty an even more alerting feedback will be shown.'});
+			if (wt == true) {
+				$(".demo input[name='email']").val('').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var input = $(this),
+						prevbutton = '<button type="button" class="popover-prev btn btn-sm btn-secondary">Prev</button>',
+						nextbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Next</button>';
+					$(prevbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().prev("fieldset").find("input").focus(); wtInputWarning(wt);
+					});
+					$(nextbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(input).popover('hide').parent().next("fieldset").find("input").focus(); wtResetForm(wt);
+					});
+				});
+			}
+		}
+		
+		function wtResetForm(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$(".demo button[type='reset']").popover('dispose').popover({html: true, placement: 'right', trigger: trigger, title: 'Reset The Form', content: 'No worries though, if a user wants to start over they can simply reset the form and it will set all of the fields back to default!'});
+			if (wt == true) {
+				$(".demo button[type='reset']").focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var finishbutton = '<button type="button" class="popover-next btn btn-sm btn-primary">Finish!</button>';
+					$(".demo")[0].reset();
+					$(finishbutton).appendTo("#" + $(eventShown.target).attr("aria-describedby")).on('click', function() {
+						$(".demo button[type='reset']").popover('dispose');
+						$(".walkthrough-stop").click();
+					});
+				});
+			}
+		}
+		
+		function wtReset() { wtName(); wtEmail(); wtPhone(); wtPhone(); wtColor(); wtDate(); wtRange(); wtTextArea();  }
+		wtReset();
 		
 		$(".row#demo .walkthrough").click(function() {
-			$(this).attr("disabled", true);
-			$(".demo input[name='name']").focus();
+			$(".demo")[0].reset();
+			if ($(this).hasClass("walkthrough-start")) {
+				$(this).removeClass("walkthrough-start").addClass("walkthrough-stop").text("Stop Walkthrough");
+				$(".demo").addClass("wt");
+				wtName(true);
+			} else {
+				$(this).removeClass("walkthrough-stop").addClass("walkthrough-start").text("Start Walkthrough");
+				$(".demo button, .demo input, .demo textarea").popover('dispose');
+				$(".demo").removeClass("wt");
+				wtReset();
+			}
 		});
 		
 		
