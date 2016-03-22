@@ -341,6 +341,20 @@ div[class*='col-'] > *:last-child {
 	right: 0;
 	top: 0;
 }
+.row#top .ad {
+	border: 2px solid rgba(255, 255, 255, 0.7);
+	border-radius: 3px;
+	bottom: 96px;
+	height: 200px;
+	left: 50%;
+	margin-left: -140px;
+	position: absolute;
+	width: 280px;
+	z-index: 1;
+}
+.row#top .ad .topAd {
+	height: 196px !important;
+}
 @media (min-width: 34em) {
 	.row#top {padding: 10% 0 0 0; z-index: 0;}
 	.row#top h1.title span {margin-top: 0;}
