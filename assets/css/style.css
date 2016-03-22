@@ -355,6 +355,7 @@ div[class*='col-'] > *:last-child {
 .row#top .ad .topAd {
 	height: 116px !important;
 	margin: 10px;
+	overflow: hidden;
 	width: 256px !important;
 }
 @media (min-width: 34em) {
