@@ -352,7 +352,6 @@ div[class*='col-'] > *:last-child {
 	width: 344px;
 }
 .row#top .ad > ins {
-	background: rgba(255, 255, 255, 0.1);
 	border-radius: 2px;
 	opacity: 0.8;
 	overflow: hidden;
