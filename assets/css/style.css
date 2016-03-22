@@ -343,9 +343,9 @@ div[class*='col-'] > *:last-child {
 }
 .row#top .ad {
 	border: 2px solid rgba(255, 255, 255, 0.7);
-	border-radius: 3px;
-	bottom: 96px;
-	height: 200px;
+	border-radius: 4px;
+	bottom: 100px;
+	height: 140px;
 	left: 50%;
 	margin-left: -140px;
 	position: absolute;
@@ -353,7 +353,9 @@ div[class*='col-'] > *:last-child {
 	z-index: 1;
 }
 .row#top .ad .topAd {
-	height: 196px !important;
+	height: 116px !important;
+	margin: 10px;
+	width: 260px !important;
 }
 @media (min-width: 34em) {
 	.row#top {padding: 10% 0 0 0; z-index: 0;}
