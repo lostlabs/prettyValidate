@@ -346,7 +346,7 @@ div[class*='col-'] > *:last-child {
 	border-radius: 6px;
 	height: 124px;
 	margin: 10px auto 20px;
-	padding: 2px;
+	padding: 10px;
 	position: relative;
 	transition: border .3s;
 	width: 344px;
