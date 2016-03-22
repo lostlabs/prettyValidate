@@ -102,7 +102,7 @@ p.small {color: #bbb;}
 
 /* Main Navigation Styling */
 
-#nav {transition: background 0.2s;}
+#nav {color: #fff; transition: background 0.2s;}
 #nav.bg-demo {background: #c7d2e0;}
 #nav.bg-contact {background: rgba(0,0,0,0.3);}
 #nav ::selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
@@ -269,7 +269,7 @@ div[class*='col-'] > *:last-child {
 .row#top {overflow: hidden;}
 .row#top ::selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
 .row#top ::-moz-selection {background: rgba(0, 0, 0, 0.6); color: #fff;}
-.row#top::after {
+.row#top:after {
 	background: linear-gradient(rgba(2, 117, 216, 0), rgba(2, 117, 216, 1) 90%);
 	content: ' ';
 	display: block;
@@ -333,7 +333,7 @@ div[class*='col-'] > *:last-child {
 	padding: 30px 20px 20px;
 	position: relative;
 }
-.row#top .validation::after {
+.row#top .validation:after {
 	content: ' ';
 	bottom: 0;
 	left: 0;
@@ -342,27 +342,37 @@ div[class*='col-'] > *:last-child {
 	top: 0;
 }
 .row#top .ad {
-	border: 2px solid rgba(255, 255, 255, 0.7);
+	background: rgba(255, 255, 255, 0.2);
 	border-radius: 4px;
-	bottom: 100px;
-	height: 140px;
-	left: 50%;
-	margin-left: -140px;
-	position: absolute;
-	width: 280px;
-	z-index: 1;
+	height: 104px;
+	margin: 10px auto 20px;
+	padding: 2px;
+	position: relative;
+	transition: background .3s;
+	width: 324px;
 }
-.row#top .ad .topAd {
-	height: 116px !important;
-	margin: 10px;
+.row#top .ad:after {
+	color: #0277D8;
+	content: 'Advertise Here!';
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	position: absolute;
+	text-align: center;
+	top: calc(50% - 10px);
+	width: 100%;
+}
+.row#top .ad:hover {background: rgba(255, 255, 255, 0.7);}
+.row#top .ad ins {
+	border-radius: 3px;
 	overflow: hidden;
-	width: 256px !important;
 }
 @media (min-width: 34em) {
-	.row#top {padding: 10% 0 0 0; z-index: 0;}
+	.row#top {padding: 0; z-index: 0;}
 	.row#top h1.title span {margin-top: 0;}
 	.row#top .center-vertical {margin-top: -27px;}
 	.row#top .validation {padding: 30px 15%;}
+	.row#top .ad {margin: 40px auto 50px;}
 }
 
 

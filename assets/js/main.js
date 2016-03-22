@@ -38,7 +38,8 @@
 			} else {
 				$('.row.full-height').removeAttr("style");
 				$('.center-vertical').removeAttr("style");
-				$(".row#top > div:first-child").removeAttr("style");
+				$(".row#top > .ad").removeAttr("style");
+				$(".row#top > div[class*='col-']").removeAttr("style");
 				$(".row#contact > #googlemaps").removeAttr("style");
 			}
 		});
@@ -54,13 +55,13 @@
 			scrollBot = $(window).scrollTop() + $(window).outerHeight();
 		$(".row#top").each(function() {
 			if (scrollTop <= $(this).outerHeight() + $(this).position().top) {
-				var position = scrollTop * 0.3;
-				$("div:first-child", this).css({transform: 'translate3d(0, ' + position + 'px, 0)'});
+				$(".ad", this).css({transform: 'translate3d(0, ' + scrollTop * 0.3 + 'px, 0)'});
+				$("div[class*='col-']", this).css({transform: 'translate3d(0, ' + scrollTop * 0.3 + 'px, 0)'});
 			}
 		});
 		$(".row#demo").each(function() {
 			if (scrollBot >= $(this).position().top && scrollTop <= $(this).position().top + $(this).outerHeight()) {
-				var position = scrollBot - $(this).position().top - ($(this).outerHeight() * 1);
+				var position = scrollBot - $(this).position().top - $(this).outerHeight();
 				$(".mountains > .mountain_layer_0", this).css({transform: 'translateY(' + position * 0.55 + 'px)'});
 				$(".mountains > .mountain_layer_1", this).css({transform: 'translateY(' + position * 0.5 + 'px)'});
 				$(".mountains > .mountain_layer_2", this).css({transform: 'translateY(' + position * 0.4 + 'px)'});
