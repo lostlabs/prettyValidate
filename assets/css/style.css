@@ -342,31 +342,23 @@ div[class*='col-'] > *:last-child {
 	top: 0;
 }
 .row#top .ad {
-	background: rgba(255, 255, 255, 0.2);
-	border-radius: 4px;
-	height: 104px;
+	border: 2px solid  rgba(255, 255, 255, 0.1);
+	border-radius: 6px;
+	height: 124px;
 	margin: 10px auto 20px;
 	padding: 2px;
 	position: relative;
-	transition: background .3s;
-	width: 324px;
+	transition: border .3s;
+	width: 344px;
 }
-.row#top .ad:after {
-	color: #0277D8;
-	content: 'Advertise Here!';
-	font-size: 14px;
-	font-weight: 600;
-	line-height: 20px;
-	position: absolute;
-	text-align: center;
-	top: calc(50% - 10px);
-	width: 100%;
-}
-.row#top .ad:hover {background: rgba(255, 255, 255, 0.7);}
-.row#top .ad ins {
-	border-radius: 3px;
+.row#top .ad > ins {
+	border-radius: 2px;
+	opacity: 0.8;
 	overflow: hidden;
+	transition: opacity .3s;
 }
+.row#top .ad:hover {border-color: rgba(255, 255, 255, 0.3);}
+.row#top .ad:hover > ins {opacity: 1;}
 @media (min-width: 34em) {
 	.row#top {padding: 0; z-index: 0;}
 	.row#top h1.title span {margin-top: 0;}
