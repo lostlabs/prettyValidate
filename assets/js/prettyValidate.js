@@ -127,7 +127,9 @@ function empty(input) {
 				$(this).addClass('date').attr('type','text');
 				$(this).datepicker({
 					autoclose: true,
-					container: $(this).parent()
+					clearBtn: true,
+					container: $(this).parent(),
+					todayHighlight: true
 				});
 			});
 			
@@ -192,19 +194,14 @@ function empty(input) {
 			
 			// Reset Form
 			$(this).on('reset', function() {
-				$("input, textarea", this).each(function() {
-					$(this).removeClass("form-control-danger form-control-warning form-control-success");
-					if($(this).hasClass("color")) {
-						$(this).removeClass("dark light").removeAttr("style");
-					}
-				});
-				$(this).find("fieldset").removeClass("has-danger has-warning has-success shake");
+				$('.form-control.date', this).each(function() { $(this).datepicker('clearDates'); });
+				$('.form-control.color', this).each(function() { $(this).colorpicker('setValue', '#FFFFFF').val('').removeClass("dark light").removeAttr("style"); });
 				$('.form-control[type="range"]', this).each(function() {
 					var min = ($(this).attr('min')) ? $(this).attr('min') : 0;
-					if ($(this).attr("placeholder")) {
-						$(this).parent().find("label.value").html(min);
-					}
+					if ($(this).attr("placeholder")) { $(this).parent().find("label.value").html(min); }
 				});
+				$(this).find("fieldset").removeClass("has-danger has-warning has-success shake");
+				$("input, textarea", this).each(function() { $(this).removeClass("form-control-danger form-control-warning form-control-success"); });
 			});
 			
 			// On Input Change
