@@ -39,6 +39,7 @@
 .prettyValidate fieldset .form-control {
 	background-color: transparent;
 	border: 0;
+	border-radius: 0;
 	font-size: 14px;
 	line-height: 16px;
 	outline: none;
@@ -47,50 +48,6 @@
 	resize: none;
 	width: 100%;
 }
-
-.prettyValidate fieldset .form-control[type="color"] {
-	font-size: 0;
-	height: 42px;
-	margin: -1px;
-	padding: 0;
-	width: calc(100% + 2px);
-}
-
-.prettyValidate fieldset .form-control[type="color"] + label {
-	bottom: 6px;
-	color: rgba(0, 0, 0, 0.32);
-	font-size: 14px;
-	left: 15px;
-	line-height: 28px;
-	padding: 0;
-	pointer-events: none;
-	position: absolute;
-}
-
-.prettyValidate fieldset .form-control[type="color"]::-webkit-color-swatch-wrapper {padding: 0;}
-
-.prettyValidate fieldset .form-control[type="color"]::-webkit-color-swatch {
-	border: none;
-	box-shadow:
-		inset 0 1px 0 rgba(0, 0, 0, 0.07),
-		inset 0 -1px 0 rgba(0, 0, 0, 0.07),
-		inset 1px 0 0 rgba(0, 0, 0, 0.13),
-		inset -1px 0 0 rgba(0, 0, 0, 0.13);
-}
-
-.prettyValidate fieldset .form-control[type="color"] + label i {
-	background: rgba(0, 0, 0, 0.25);
-	border-radius: 3px;
-	color: rgba(255, 255, 255, 0.9);
-	font-size: 12px;
-	line-height: 28px;
-	margin: 0 4px 0 0;
-	padding: 0 9px;
-	vertical-align: top;
-}
-
-.prettyValidate fieldset .form-control[type="color"].dark + label {color: rgba(255, 255, 255, 0.7);}
-.prettyValidate fieldset .form-control[type="color"].dark + label i {background: rgba(255, 255, 255, 0.7);}
 
 .prettyValidate fieldset .form-control[type="range"] {
 	margin: 0;
@@ -103,21 +60,54 @@
 	background: #c0c0c0;
 	border: none;
 	border-radius: 50%;
+	box-shadow: 0 0 0 3px #fff;
 	height: 15px;
 	margin-top: -5px;
+	transition: transform 0.1s;
 	width: 15px;
 	-webkit-appearance: none;
 }
 
 .prettyValidate fieldset .form-control[type="range"]::-webkit-slider-runnable-track {
-  background: #eee;
-  border-radius: 3px;
-  cursor: pointer;
-  height: 5px;
-  width: 100%;
+	background: #eee;
+	border-radius: 3px;
+	cursor: pointer;
+	height: 5px;
+	width: 100%;
 }
 
-.prettyValidate fieldset .form-control[type="range"]:active::-webkit-slider-thumb {background: #b0b0b0;}
+.prettyValidate fieldset .form-control[type="range"]:active::-webkit-slider-thumb {background: #b0b0b0; transform: scale(1.1);}
+
+.prettyValidate fieldset .form-control.color,
+.prettyValidate fieldset .form-control.date {padding-left: 43px;}
+
+.prettyValidate fieldset .form-control.color + label,
+.prettyValidate fieldset .form-control.date + label {
+	bottom: 6px;
+	color: rgba(0, 0, 0, 0.32);
+	font-size: 14px;
+	left: 15px;
+	line-height: 28px;
+	padding: 0;
+	pointer-events: none;
+	position: absolute;
+}
+
+.prettyValidate fieldset .form-control.color {
+	background-color: #fff;
+	box-shadow:
+		inset 0 1px 0 rgba(0, 0, 0, 0.07),
+		inset 0 -1px 0 rgba(0, 0, 0, 0.07),
+		inset 1px 0 0 rgba(0, 0, 0, 0.13),
+		inset -1px 0 0 rgba(0, 0, 0, 0.13);
+	height: 42px;
+	margin: -1px;
+	text-transform: uppercase;
+	width: calc(100% + 2px);
+}
+
+.prettyValidate fieldset .form-control.color.dark,
+.prettyValidate fieldset .form-control.color.dark + label{color: rgba(255, 255, 255, 0.7);}
 
 .prettyValidate fieldset label.value {
 	color: #777;
@@ -152,9 +142,7 @@
 	text-align: right;
 }
 
-.prettyValidate fieldset label + .form-control[type="range"] {
-	margin: -12px 0 0;
-}
+.prettyValidate fieldset label + .form-control[type="range"] {margin: -12px 0 0;}
 
 .prettyValidate fieldset .form-control:-webkit-autofill {box-shadow: inset 0 0 0 20px #fff;}
 .prettyValidate fieldset .form-control::-webkit-input-placeholder {color: #aaa;}
