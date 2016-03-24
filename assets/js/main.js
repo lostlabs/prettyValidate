@@ -139,15 +139,10 @@
 		
 		// DEMO SECTION SCRIPTS
 		
-		$('.demo').prettyValidate({
-			valid: function(){
-				event.preventDefault();
-				alert($(this).serialize());
-			}
-		});
+		$('.demo').prettyValidate({ajax: true});
 		
-		var prevbutton   = '<button type="button" class="popover-prev btn btn-secondary">Prev</button>',
-			nextbutton   = '<button type="button" class="popover-next btn btn-primary">Next</button>';
+		var prevbutton = '<button type="button" class="popover-prev btn btn-secondary">Prev</button>',
+			nextbutton = '<button type="button" class="popover-next btn btn-primary">Next</button>';
 		
 		function setHeight(eventShown) {
 			$('#' + $(eventShown.target).attr('aria-describedby')).css({

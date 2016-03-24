@@ -97,7 +97,7 @@
 			});
 			
 			// Submit Form
-			$(this).on('submit', function() {
+			$(this).on('submit', function(event) {
 				$.isFunction(options.beforeSend) && options.beforeSend.call(this);
 				var error = 0;
 				var form  = $(this);
@@ -114,23 +114,36 @@
 						if ($(this).is("textarea") && validate($(this), 'noHTML')) { error++; }
 					}
 				});
-				console.log(error);
 				if (error == 0) {
 					$.isFunction(options.valid) && options.valid.call(this);
-					if (!$.isFunction(options.valid) && !options.ajax) { return true }
-					else if (options.ajax) {
+					if (options.ajax) {
 						$.ajax({
+							type: "POST",
 							url: form.attr("action"),
-							data: form.serialize(),
-							dataType: "json",
-							type: "post",
-							success: function(data) { options.success.call(this, data) },
-							error: function(data) { options.error.call(this, data) },
-							complete: function(data) { options.complete.call(this, data) }
+							data: $(form).serialize(),
+							success: function(data) {
+								if (options.reset) $(form)[0].reset();
+								if ($.isFunction(options.success)) { options.success.call(this); }
+								else {
+									var message = '<b>Thank you!</b> for submitting the form.';
+									if (!$(".success", form).length) { $('<div class="success"></div>').appendTo(form).html(message); }
+									else { $(".success", form).html(message); }
+								}
+							},
+							error: function(xhr, status, errorThrown) {
+								if ($.isFunction(options.error)) { options.error.call(this, errorThrown); }
+								else {
+									var message = '<b>' + status + ':</b> ' + errorThrown;
+									if (!$(".error", form).length) { $('<div class="error"></div>').appendTo(form).html(message); }
+									else { $(".error", form).html(message); }
+								}
+							},
+							complete: function(data) { 
+								$.isFunction(options.complete) && options.complete.call(this, data)
+							}
 						});
 						return false;
-					}
-					if (options.reset) form[0].reset();
+					} else { return true; }
 				} else {
 					$.isFunction(options.invalid) && options.invalid.call(this);
 					if (options.shake) {
