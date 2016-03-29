@@ -183,9 +183,9 @@
 										$('<div class="error alert alert-danger"></div>').appendTo(form).html(message).hide().fadeIn('500');
 									}
 								},
-								complete: function(data) {
+								complete: function() {
 									setTimeout(function() {
-										$.isFunction(options.complete) && options.complete.call(this, data);
+										$.isFunction(options.complete) && options.complete.call(this);
 										$('.prettyLoading, .success, .error', form).fadeOut(function(){ $(this).remove(); });
 									}, 1500);
 								}
