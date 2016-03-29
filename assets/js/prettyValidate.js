@@ -173,11 +173,7 @@
 										else { var name = ''; }
 										var message = '<strong>Thanks' + name + '</strong> for submitting the demo form.';
 										$('<div class="success alert alert-success"></div>').appendTo(form).html(message).hide().fadeIn('500');
-										setTimeout(function() {
-											if (options.reset) { $(form)[0].reset(); }
-											$.isFunction(options.complete) && options.complete.call(this, data);
-											$('.prettyLoading, .success', form).fadeOut(function(){ $(this).remove(); });
-										}, 1500);
+										setTimeout(function() { if (options.reset) $(form)[0].reset(); }, 1000);
 									}
 								},
 								error: function(xhr, status, error) {
@@ -185,10 +181,13 @@
 									else {
 										var message = '<strong>' + status + ':</strong> ' + error;
 										$('<div class="error alert alert-danger"></div>').appendTo(form).html(message).hide().fadeIn('500');
-										setTimeout(function() {
-											$('.prettyLoading, .error', form).fadeOut(function(){ $(this).remove(); });
-										}, 1500);
 									}
+								},
+								complete: function(data) {
+									setTimeout(function() {
+										$.isFunction(options.complete) && options.complete.call(this, data);
+										$('.prettyLoading, .success, .error', form).fadeOut(function(){ $(this).remove(); });
+									}, 1500);
 								}
 							});
 						}, 500);
