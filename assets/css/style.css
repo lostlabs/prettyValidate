@@ -561,7 +561,7 @@ div[class*='col-'] > *:last-child {
 .row#usage .anchorjs-link:hover {color: #0275d8;}
 .row#usage .title .lead {margin-top: .5rem;}
 .row#usage .example {
-	border: 2px solid #f7f7f9;
+	border: 5px solid #f7f7f9;
 	border-bottom: none;
 	border-radius: 3px 3px 0 0;
 	padding: 0.8rem 1rem 1rem;
@@ -605,7 +605,7 @@ div[class*='col-'] > *:last-child {
 .row#usage .example > fieldset input[type="range"] {padding: 18px 15px 17px;}
 .row#usage .example > fieldset + label {margin-top: 0.8rem;}
 .row#usage .example + figure {border-radius: 0 0 3px 3px;}
-.row#usage .cp_embed_iframe {}
+.row#usage .cp_embed_iframe {border-radius: 3px 3px 0 0; margin-bottom: -10px;}
 
 
 /* ============ CONTACT ============ */

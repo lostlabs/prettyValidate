@@ -288,17 +288,17 @@ $("#form").prettyValidate({
 				</div>
 				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
 					<h4>Example 1</h4>
-					<p>In this example we will be disabling the forms submit buttong while the Ajax function is firing then re-enabling it once the action is complete.</p>
-					<p data-height="225" data-theme-id="23071" data-slug-hash="KzvgZq" data-default-tab="result" data-user="lostlabs" class="codepen"></p>
+					<p>In this example we will be disabling the forms submit button while the Ajax function is firing, then re-enabling it once the action is complete.</p>
+					<p data-height="235" data-theme-id="23071" data-slug-hash="KzvgZq" data-default-tab="result" data-user="lostlabs" class="codepen"></p>
 					<figure class="highlight">
 						<pre><code class="language-javascript">// Disabling the submit button while the Ajax function is working.
 $('#form').prettyValidate({
 	ajax: true, // we'll be submitting the form with Ajax
 	valid: function(event) {
-		$('input[type="submit"]', this).attr('disabled', true); // we want to disable the submit button as the form is passing through ajax
+		$('#form input[type="submit"]').attr('disabled', true); // we want to disable the submit button as the form is passing through ajax
 	},
 	complete: function() {
-		$('input[type="submit"]', this).attr('disabled', false); // re-enable the submit button once Ajax is complete
+		$('#form input[type="submit"]').attr('disabled', false); // re-enable the submit button once Ajax is complete
 	}
 });
 </code></pre>

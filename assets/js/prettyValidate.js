@@ -147,9 +147,8 @@
 				if (error == 0) {
 					$.isFunction(options.valid) && options.valid.call(this, event);
 					if (options.ajax) {
-						var setURL = (form.attr("action")) ? form.attr("action") : '',
-						   formURL = (options.url) ? options.url : setURL,
-						  formData = form.serialize();
+						var formURL = (options.url) ? options.url : form.attr("action"),
+						   formData = form.serialize();
 						$('input, button, textarea', form).blur();
 						$('.error, .success', form).remove();
 						if (!$('.prettyLoading', form).length) {
@@ -173,7 +172,7 @@
 										else { var name = ''; }
 										var message = '<strong>Thanks' + name + '</strong> for submitting the demo form.';
 										$('<div class="success alert alert-success"></div>').appendTo(form).html(message).hide().fadeIn('500');
-										setTimeout(function() { if (options.reset) $(form)[0].reset(); }, 1000);
+										if (options.reset) { setTimeout(function() { $(form)[0].reset(); }, 1000); }
 									}
 								},
 								error: function(xhr, status, error) {
