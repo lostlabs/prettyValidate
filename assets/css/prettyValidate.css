@@ -5,6 +5,10 @@
  * details, see https://creativecommons.org/licenses/by/3.0/.
  */
 
+.prettyValidate {
+	position: relative;
+}
+
 .prettyValidate h5 {
 	color: #555;
 	font-weight: bold;
@@ -28,6 +32,15 @@
 	padding: 0;
 	position: relative;
 }
+
+.prettyValidate fieldset.input-group .form-control {
+	width: 50%;
+}
+
+.prettyValidate fieldset.input-group .form-control:last-child {
+	border-left: 1px solid #eee;
+}
+
 .prettyValidate fieldset label {
 	color: #aaa;
 	font-size: 14px;
@@ -153,6 +166,9 @@
 .prettyValidate fieldset.shake .form-control,
 .prettyValidate fieldset.shake .form-control + label {animation: shake 0.4s ease-in-out;}
 
+.prettyValidate fieldset.input-group .form-control[type="phone"] {width: 70%;}
+.prettyValidate fieldset.input-group .form-control[type="phone"] + input {border-left: 1px solid #eee; width: 30%;}
+
 @keyframes shake {
 	  0% {transform: translateX( 0  );}
 	 20% {transform: translateX(-6px);}
@@ -189,4 +205,25 @@
 	line-height: 0px;
 	position:  relative;
 	margin-right: 2px;
+}
+
+.prettyValidate .prettyLoading {
+	background: rgba(255, 255, 255, 0.8);
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 8;
+}
+
+.prettyValidate > .error,
+.prettyValidate > .success {
+	border-radius: 3px;
+	left: 20%;
+	padding: 15px 20px;
+	position: absolute;
+	top: 20%;
+	width: 60%;
+	z-index: 9;
 }

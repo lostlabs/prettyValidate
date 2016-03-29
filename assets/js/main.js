@@ -112,7 +112,7 @@
 		
 		$('[data-toggle="tooltip"]').tooltip();
 
-		$('a[href*="#"]:not([href="#"]):not(.anchorjs-link)').click(function(e) {
+		$('a[href*="#"]:not([href="#"]):not(.anchorjs-link)').click(function(event) {
 			if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 				var dest   = $(this).attr('href');
 				var target = $(this.hash);
@@ -124,7 +124,7 @@
 					$('html, body').stop().animate({
 						scrollTop: offset
 					}, 1000);
-					e.preventDefault();
+					event.preventDefault();
 				}
 			}
 		});
@@ -139,7 +139,11 @@
 		
 		// DEMO SECTION SCRIPTS
 		
-		$('.demo').prettyValidate({ajax: true});
+		$('.demo').prettyValidate({
+			ajax: true,
+			valid: function() { $('.row#demo .autofill').fadeOut('500'); },
+			complete: function() { $('.row#demo .autofill').fadeIn('500'); }
+		});
 		
 		var prevbutton = '<button type="button" class="popover-prev btn btn-secondary">Prev</button>',
 			nextbutton = '<button type="button" class="popover-next btn btn-primary">Next</button>';
@@ -173,7 +177,7 @@
 					var input = $(this);
 					$(input).on('blur', function() { $(this).focus(); });
 					$(prevbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
-						$(input).unbind('blur').val('').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('has-danger has-warning has-success shake').prev('fieldset').find('input').focus(); wtName(wt);
+						$(input).unbind('blur').val('').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('shake').prev('fieldset').find('input').focus(); wtName(wt);
 					});
 					$(nextbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
 						$(input).unbind('blur').popover('hide').parent().next('fieldset').find('input').focus(); wtPhone(wt);
@@ -190,7 +194,24 @@
 					var input = $(this);
 					$(input).on('blur', function() { $(this).focus(); });
 					$(prevbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
-						$(input).unbind('blur').val('').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('has-danger has-warning has-success shake').prev('fieldset').find('input').focus(); wtEmail(wt);
+						$(input).unbind('blur').val('').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('shake').prev('fieldset').find('input').focus(); wtEmail(wt);
+					});
+					$(nextbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
+						$(input).unbind('blur').popover('hide').next('input').focus(); wtExt(wt);
+					}); setHeight(eventShown);
+				});
+			}
+		}
+		
+		function wtExt(wt) {
+			var trigger = (wt == true) ? 'manual' : 'focus';
+			$('.demo input[name="ext"]').popover('dispose').popover({html: true, placement: 'right', trigger: trigger, title: 'Phone Ext Validation', content: 'To add an Phone Extension field, simply add <code>data-ext="true"</code> to your phone field. Accepts up to any 5 numbers long.'});
+			if (wt == true) {
+				$('.demo input[name="ext"]').val('252').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
+					var input = $(this);
+					$(input).on('blur', function() { $(this).focus(); });
+					$(prevbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
+						$(input).unbind('blur').val('').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('shake').prev('fieldset').find('input').focus(); wtPhone(wt);
 					});
 					$(nextbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
 						$(input).unbind('blur').popover('hide').parent().next('fieldset').find('input').focus(); wtColor(wt);
@@ -201,13 +222,13 @@
 		
 		function wtColor(wt) {
 			var trigger = (wt == true) ? 'manual' : 'focus';
-			$('.demo input[name="color"]').popover('dispose').popover({html: true, placement: 'right', trigger: trigger, title: 'Bootstrap Colorpicker', content: 'prettyValidate uses <a href="http://mjolnic.com/bootstrap-colorpicker/" target="_blank">Bootstrap Colorpicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="http://github.com/mjolnic" target="_blank">Javier Aguilar</a>.'});
+			$('.demo input[name="color"]').popover('dispose').popover({html: true, placement: 'left', trigger: trigger, title: 'Bootstrap Colorpicker', content: 'prettyValidate uses <a href="http://mjolnic.com/bootstrap-colorpicker/" target="_blank">Bootstrap Colorpicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="http://github.com/mjolnic" target="_blank">Javier Aguilar</a>.'});
 			if (wt == true) {
 				$('.demo input[name="color"]').colorpicker('setValue', '#0275d8').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
 					var input = $(this);
 					$(input).on('blur', function() { $(this).focus(); });
 					$(prevbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
-						$(input).unbind('blur').colorpicker('setValue', '#FFFFFF').val('').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('has-danger has-warning has-success shake').prev('fieldset').find('input').focus(); wtPhone(wt);
+						$(input).unbind('blur').colorpicker('setValue', '#FFFFFF').val('').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('shake').prev('fieldset').find('input').focus(); wtExt(wt);
 					});
 					$(nextbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
 						$(input).unbind('blur').popover('hide').parent().next('fieldset').find('input').focus(); wtDate(wt);
@@ -218,13 +239,13 @@
 		
 		function wtDate(wt) {
 			var trigger = (wt == true) ? 'manual' : 'focus';
-			$('.demo input[name="date"]').popover('dispose').popover({html: true, placement: 'left', trigger: trigger, title: 'Bootstrap Datepicker', content: 'prettyValidate uses <a href="http://bootstrap-datepicker.readthedocs.org/en/latest/" target="_blank">Bootstrap Datepicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="https://github.com/eternicode" target="_blank">Andrew Rowls</a>.'});
+			$('.demo input[name="date"]').popover('dispose').popover({html: true, placement: 'right', trigger: trigger, title: 'Bootstrap Datepicker', content: 'prettyValidate uses <a href="http://bootstrap-datepicker.readthedocs.org/en/latest/" target="_blank">Bootstrap Datepicker</a> written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and modified by <a href="https://github.com/eternicode" target="_blank">Andrew Rowls</a>.'});
 			if (wt == true) {
 				$('.demo input[name="date"]').datepicker('setDate', new Date()).change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
 					var input = $(this);
 					$(input).on('blur', function() { $(this).focus(); });
 					$(prevbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
-						$(input).unbind('blur').datepicker('clearDates').datepicker('hide').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('has-danger has-warning has-success shake').prev('fieldset').find('input').focus(); wtColor(wt);
+						$(input).unbind('blur').datepicker('clearDates').datepicker('hide').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('shake').prev('fieldset').find('input').focus(); wtColor(wt);
 					});
 					$(nextbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
 						$(input).unbind('blur').datepicker('hide').popover('hide').parent().next('fieldset').find('input').focus(); wtRange(wt);
@@ -235,14 +256,14 @@
 		
 		function wtRange(wt) {
 			var trigger = (wt == true) ? 'manual' : 'focus';
-			$('.demo input[name="range"]').popover('dispose').popover({html: true, offset: '13 -30', placement: 'right', trigger: trigger, title: 'A Pretty Range', content: 'The value can be displayed by adding the <code>placeholder=\"\"</code> attribute.'});
+			$('.demo input[name="range"]').popover('dispose').popover({html: true, offset: '13 18', placement: 'left', trigger: trigger, title: 'A Pretty Range', content: 'The value can be displayed by adding the <code>placeholder=\"\"</code> attribute.'});
 			if (wt == true) {
 				$('.demo input[name="range"]').focus().popover('show').on('shown.bs.popover', function(eventShown) {
 					var input = $(this),
 						step = setInterval(function() { var newVal = parseInt($(input).val()) + 1; if (newVal <= 50) { $(input).val(newVal).parent().find('label.value').html(newVal); } else { clearInterval(step); } }, 15);
 					$(input).on('blur', function() { $(this).focus(); });
 					$(prevbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
-						$(input).unbind('blur').val('0').change().removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('has-danger has-warning has-success shake').find('label.value').html('0').parent().prev('fieldset').find('input').focus(); wtDate(wt);
+						$(input).unbind('blur').val('0').change().removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('shake').find('label.value').html('0').parent().prev('fieldset').find('input').focus(); wtDate(wt);
 					});
 					$(nextbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
 						$(input).unbind('blur').popover('hide').parent().next('fieldset').find('input').focus(); wtTextArea(wt);
@@ -253,13 +274,13 @@
 		
 		function wtTextArea(wt) {
 			var trigger = (wt == true) ? 'manual' : 'focus';
-			$('.demo textarea').popover('dispose').popover({html: true, placement: 'left', trigger: trigger, title: 'Textarea Validation', content: 'Accepts all charachters but will return an error if any <code>HTML</code> has been detected.'});
+			$('.demo textarea').popover('dispose').popover({html: true, placement: 'right', trigger: trigger, title: 'Textarea Validation', content: 'Accepts all charachters but will return an error if any <code>HTML</code> has been detected.'});
 			if (wt == true) {
 				$('.demo textarea').val('Some Text').change().focus().popover('show').on('shown.bs.popover', function(eventShown) {
 					var input = $(this);
 					$(input).on('blur', function() { $(this).focus(); });
 					$(prevbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
-						$(input).unbind('blur').val('').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('has-danger has-warning has-success shake').prev('fieldset').find('input').focus(); wtRange(wt);
+						$(input).unbind('blur').val('').removeClass('form-control-danger form-control-warning form-control-success').popover('hide').parent().removeClass('shake').prev('fieldset').find('input').focus(); wtRange(wt);
 					});
 					$(nextbutton).appendTo('#' + $(eventShown.target).attr('aria-describedby')).on('click', function() {
 						$(input).unbind('blur').popover('hide').parent().next('fieldset').find('input').focus(); wtInputValid(wt);
@@ -350,6 +371,7 @@
 						$('.demo input[name="name"]').val('John Doe').change();
 						$('.demo input[name="email"]').val('john@#').change();
 						$('.demo input[name="phone"]').val('').change();
+						$('.demo input[name="ext"]').val('252').change();
 						$('.demo input[name="color"]').colorpicker('setValue', '#0275d8').change();
 						$('.demo input[name="date"]').datepicker('setDate', new Date()).change();
 						$('.demo input[name="range"]').val('50').change().parent().find('label.value').html('50');
@@ -366,7 +388,7 @@
 			}
 		}
 		
-		function wtReset() { wtName(); wtEmail(); wtPhone(); wtPhone(); wtColor(); wtDate(); wtRange(); wtTextArea();  }
+		function wtReset() { wtName(); wtEmail(); wtPhone(); wtExt(); wtPhone(); wtColor(); wtDate(); wtRange(); wtTextArea();  }
 		wtReset();
 		
 		$('.row#demo .walkthrough').click(function() {
@@ -379,18 +401,31 @@
 			} else {
 				$(this).removeClass('walkthrough-stop').addClass('walkthrough-start').text('Start Walkthrough');
 				$('button, input, textarea', form).popover('dispose').unbind('blur');
-				$(form).removeClass('wt').unbind('keydown').prettyValidate({valid: function(){ event.preventDefault(); alert($(this).serialize()); }});
+				$(form).removeClass('wt').unbind('keydown').prettyValidate({
+					ajax: true,
+					valid: function() { $('.row#demo .autofill').fadeOut('500'); },
+					complete: function() { $('.row#demo .autofill').fadeIn('500'); }
+				});
 				wtReset();
 			}
 		});
 		
+		$('.autofill').click(function(){
+			$('.demo input[name="name"]').val('John Doe').change();
+			$('.demo input[name="email"]').val('john@email.com').change();
+			$('.demo input[name="phone"]').val('555-555-5555').change();
+			$('.demo input[name="color"]').val('#0275d8').change();
+			$('.demo input[name="date"]').datepicker('setDate', new Date()).change();
+			$('.demo input[name="range"]').val('50').change().parent().find('label.value').html('50');
+			$('.demo textarea').val('Some Text').change();
+		});
 		
 		// USAGE SECTION SCRIPTS
 		
 		anchors.add('#usage h1');
 		anchors.add('#usage h4');
 		
-		hljs.configure({ tabReplace: '    ' });
+		hljs.configure({ tabReplace: '   ' });
 		$('figure code').each(function(i, block) {
 			hljs.highlightBlock(block);
 		});
@@ -423,94 +458,34 @@
 			$(e.trigger).attr('title', fallbackMsg).tooltip('_fixTitle').tooltip('show').attr('title', 'Copy to clipboard').tooltip('_fixTitle');
 		});
 		
+		$(".example").prettyValidate({ valid: function(event) { event.preventDefault(); } });
+		
 		
 		// CONTACT SECTION SCRIPTS
 
-		$('.contact').prettyValidate();
-
-		var position = [40.0577919, -75.541693];
+		$('.contact').prettyValidate({ajax: true});
 
 		function showGoogleMaps() {
-
 			var styles = [
-				{
-					"featureType": "administrative",
-					"elementType": "labels.text.fill",
-					"stylers": [{"color": "#444444"}]
-				},
-				{
-					"featureType": "landscape",
-					"elementType": "all",
-					"stylers": [{"color": "#f2f2f2"}]
-				},
-				{
-					"featureType": "poi",
-					"elementType": "all",
-					"stylers": [{"visibility": "off"}]
-				},
-				{
-					"featureType": "road",
-					"elementType": "all",
-					"stylers": [
-						{"saturation": -100},
-						{"lightness": 45}
-					]
-				},
-				{
-					"featureType": "road.highway",
-					"elementType": "all",
-					"stylers": [{"visibility": "simplified"}]
-				},
-				{
-					"featureType": "road.arterial",
-					"elementType": "labels.icon",
-					"stylers": [{"visibility": "off"}]
-				},
-				{
-					"featureType": "transit",
-					"elementType": "all",
-					"stylers": [{"visibility": "off"}]
-				},
-				{
-					"featureType": "water",
-					"elementType": "all",
-					"stylers": [{"color": "#0275d8"}]
-				}
-			];
-
-			var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
-
-			var latLng = new google.maps.LatLng(position[0], position[1]);
-
-			var mapOptions = {
-				zoom: 14,
-				center: latLng,
-				streetViewControl: false,
-				navigationControl: false,
-				mapTypeControl: false,
-				scaleControl: false,
-				zoomControl: false,
-				scrollwheel: false,
-				draggable: false,
-				mapTypeControlOptions: {
-					mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-				}
-			};
+				{"featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{"color": "#444444"}]},
+				{"featureType": "landscape", "elementType": "all", "stylers": [{"color": "#f2f2f2"}]},
+				{"featureType": "poi", "elementType": "all", "stylers": [{"visibility": "off"}]},
+				{"featureType": "road", "elementType": "all", "stylers": [{"saturation": -100}, {"lightness": 45}]},
+				{"featureType": "road.highway", "elementType": "all", "stylers": [{"visibility": "simplified"}]},
+				{"featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{"visibility": "off"}]},
+				{"featureType": "transit", "elementType": "all", "stylers": [{"visibility": "off"}]},
+				{"featureType": "water", "elementType": "all", "stylers": [{"color": "#0275d8"}]}
+			],
+			styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"}),
+			position = [40.0577919, -75.541693],
+			latLng = new google.maps.LatLng(position[0], position[1]),
+			mapOptions = {zoom: 14, center: latLng, streetViewControl: false, navigationControl: false, mapTypeControl: false, scaleControl: false, zoomControl: false, scrollwheel: false, draggable: false, mapTypeControlOptions: { mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style'] }};
 
 			map = new google.maps.Map(document.getElementById('googlemaps'), mapOptions);
-
-			/* marker = new google.maps.Marker({
-				position: latLng,
-				map: map,
-				draggable: false,
-				animation: google.maps.Animation.DROP
-			}); */
-
 			map.mapTypes.set('map_style', styledMap);
 			map.setMapTypeId('map_style');
-
 		}
-
+		
 		google.maps.event.addDomListener(window, 'load', showGoogleMaps);
 
 	});

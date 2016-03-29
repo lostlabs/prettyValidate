@@ -33,7 +33,15 @@
 					<li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
 					<li class="nav-item"><a class="nav-link" href="#demo">Demo</a></li>
-					<li class="nav-item"><a class="nav-link" href="#usage">Usage</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usage</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#usage">Basic Usage</a>
+							<a class="dropdown-item" href="#options">Options</a>
+							<a class="dropdown-item" href="#examples">Examples</a>
+							<a class="dropdown-item" href="#formatting">Formatting</a>
+						</div>
+					</li>
 					<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 				</ul>
 			</div>
@@ -43,7 +51,7 @@
 				<div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xl-offset-4">
 					<h1 class="title"><i class="fa fa-check-square-o"></i>prettyValidate <span class="label label-default" data-toggle="tooltip" data-placement="top" title="Initial release coming soon!">Beta</span></h1>
 					<p class="tagline">Get rid of that <u>outdated</u> form validation you've been using for years and upgrade to something a bit <i>prettier</i>.</p>
-					<a href="http://github.com/lostlabs/prettyValidate/zipball/master" class="btn btn-secondary-outline download" target="_blank" title="Visit Github repository to download">Download</a>
+					<a href="http://github.com/lostlabs/prettyValidate/zipball/master" class="btn btn-secondary-outline btn-light download" target="_blank" title="Visit Github repository to download">Download</a>
 					<p class="version"><a href="http://github.com/lostlabs/prettyValidate/" target="_blank" title="Revisions">Current v0.8.8-beta</a></p>
 					<form class="validation">
 						<h5>Test Validation Form</h5><div class="line"></div>
@@ -95,11 +103,11 @@
 				</div>
 				<div class="center-vertical col-sm-10 col-md-8 col-lg-6 col-xl-4 col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xl-offset-4">
 					<button class="walkthrough walkthrough-start" type="button">Start Walkthrough</button>
-					<form class="demo" action="http://lostlabs.byethost17.com/prettyValidate/demo.php">
+					<form class="demo" action="hosted/demo.php" method="POST">
 						<h5>Demo Form</h5><div class="line"></div>
 						<fieldset class="form-group"><input type="text" class="form-control required" name="name" placeholder="Name"></fieldset>
 						<fieldset class="form-group"><input type="email" class="form-control required" name="email" placeholder="Email"></fieldset>
-						<fieldset class="form-group"><input type="phone" class="form-control required" name="phone" placeholder="Phone Number"></fieldset>
+						<fieldset class="form-group"><input type="phone" class="form-control required" name="phone" placeholder="Phone Number" data-ext="true"></fieldset>
 						<fieldset class="form-group"><input type="color" class="form-control required" name="color" placeholder="#FFFFFF"></fieldset>
 						<fieldset class="form-group"><input type="date" class="form-control required" name="date" placeholder="MM/DD/YYYY"></fieldset>
 						<fieldset class="form-group"><input type="range" class="form-control" name="range" value="0" placeholder="Range"></fieldset>
@@ -110,6 +118,7 @@
 							<button type="reset" class="btn">Reset</button>
 						</div>
 					</form>
+					<button class="autofill btn btn-sm btn-primary" type="button">AutoFill</button>
 				</div>
 				<span class="pagenav next dark hidden-xs-down">Artwork By <a href="http://www.camposanto.com/" target="_blank">Campo Santo</a> &nbsp;·&nbsp; Idea From <a href="http://codepen.io/samdbeckham/pen/OPXPNp" target="_blank">Sam Beckham</a></span>
 			</section>
@@ -149,15 +158,310 @@ $("#form").prettyValidate();</code></pre>
 						<pre><code class="language-javascript">// Initialize
 $("#form").prettyValidate({
 	ajax: false, // use Ajax to submit the form
+	url: false, // URL for Ajax request
+	redirect: false, // redirect to a success page after ajax
 	reset: true, // reset the form once it's submitted
 	shake: true, // shake the input if invalid
-	valid: function(){}, // fired once form is successfully validated
+	valid: function(){}, // fired if the form is valid and before ajax
 	invalid: function(){}, // fired if an invalid field is found
-	success: function(json){}, // if the form submit was a success
-	error: function(xhr, status){}, // if an error occured during submit
-	complete: function(xhr, status){}, // once ajax is complete
-	beforeSend: function(){} // fired before form is proccessed
+	success: function(data){}, // fired if ajax is successful
+	error: function(error){}, // if an error occured during ajax
+	complete: function(data){}, // fires as the overlay fades out
+	beforeSend: function(){}, // fired before form is validated
+	debug: false // sends messages to console
 });</code></pre>
+					</figure>
+				</div>
+				
+				<div class="title col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2" id="options">
+					<h1>Options</h1>
+					<p class="lead">prettyValidate's options will grow with development as there is plenty of room for improvement and area's that could become changeable with options. If you have an idea for an option, please contact me on <a href="http://github.com/lostlabs/prettyValidate/" target="_blank">Github</a>.</p>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<table class="table table-hover">
+						<colgroup>
+							<col span="2" width="150px">
+							<col width="100px">
+							<col width="200px">
+						</colgroup>
+						<thead>
+							<tr class="thead-inverse">
+								<th>Name</th>
+								<th>Type</th>
+								<th>Default</th>
+								<th>Accepted Values</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>ajax</th>
+								<td>boolean</td>
+								<td><code>false</code></td>
+								<td><code>true</code>, <code>false</code></td>
+								<td>Submit the form via Ajax.</td>
+							</tr>
+							<tr>
+								<th>url</th>
+								<td>string</td>
+								<td><code>false</code></td>
+								<td>URL</td>
+								<td>If set, will ignore the forms <code>action=""</code> attribute and will send the Ajax request to this URL. Requires <code>ajax: true</code></td>
+							</tr>
+							<tr>
+								<th>redirect</th>
+								<td>boolean or string</td>
+								<td><code>false</code></td>
+								<td><code>true</code>, or URL</td>
+								<td>If set to true, will redirect to the forms <code>action=""</code> attribute; otherwise will redirect to set URL. Requires <code>ajax: true</code>.</td>
+							</tr>
+							<tr>
+								<th>reset</th>
+								<td>boolean</td>
+								<td><code>true</code></td>
+								<td><code>true</code>, <code>false</code></td>
+								<td>If true, the form will reset once it's successful.</td>
+							</tr>
+							<tr>
+								<th>shake</th>
+								<td>boolean</td>
+								<td><code>true</code></td>
+								<td><code>true</code>, <code>false</code></td>
+								<td>Invalid inputs will shake on submit.</td>
+							</tr>
+							<tr>
+								<th>valid</th>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><code>function(){}</code></td>
+								<td>Fired once the form is returned valid.</td>
+							</tr>
+							<tr>
+								<th>invalid</th>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><code>function(){}</code></td>
+								<td>Fired if an invalid field is found.</td>
+							</tr>
+							<tr>
+								<th>success</th>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><code>function(data){}</code></td>
+								<td>Fired if the Ajax was successful. Requires <code>ajax: true</code>.</td>
+							</tr>
+							<tr>
+								<th>error</th>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><code>function(error){}</code></td>
+								<td>Fired if an error occurs during Ajax. Requires <code>ajax: true</code>.</td>
+							</tr>
+							<tr>
+								<th>complete</th>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><code>function(data){}</code></td>
+								<td>Fired as the loading overlay fades out. Requires <code>ajax: true</code>.</td>
+							</tr>
+							<tr>
+								<th>beforeSend</th>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><code>function(){}</code></td>
+								<td>Fired before the form is sent through validation.</td>
+							</tr>
+							<tr>
+								<th>debug</th>
+								<td>boolean</td>
+								<td><code>false</code></td>
+								<td><code>true</code>, <code>false</code></td>
+								<td>Will output messages in your browsers console about what's going on in the function.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div class="title col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2" id="examples">
+					<h1>Examples</h1>
+					<p class="lead">Below are a few examples of prettyValidate's options beings used when calling the <code>.prettyValidate()</code> function.</p>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<h4>Example 1</h4>
+					<p>In this example we will be disabling the forms submit buttong while the Ajax function is firing then re-enabling it once the action is complete.</p>
+					<p data-height="225" data-theme-id="23071" data-slug-hash="KzvgZq" data-default-tab="result" data-user="lostlabs" class="codepen"></p>
+					<figure class="highlight">
+						<pre><code class="language-javascript">// Disabling the submit button while the Ajax function is working.
+$('#form').prettyValidate({
+	ajax: true, // we'll be submitting the form with Ajax
+	valid: function(event) {
+		$('input[type="submit"]', this).attr('disabled', true); // we want to disable the submit button as the form is passing through ajax
+	},
+	complete: function() {
+		$('input[type="submit"]', this).attr('disabled', false); // re-enable the submit button once Ajax is complete
+	}
+});
+</code></pre>
+					</figure>
+				</div>
+				
+				<div class="title col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2" id="formatting">
+					<h1>Formatting</h1>
+					<p class="lead">Most <a href="http://v4-alpha.getbootstrap.com/components/forms/" target="_blank" title="Forms · Bootstrap">Bootstrap Form</a> formatting will work prettyValidate inputs. The only exception is that all fields <b><u>must</u></b> be wrapped inside of a <code>&lt;fieldset&gt;</code> tag in order for prettyValidate to work.</p>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<h4>Text Input</h4>
+					<p>Fields left with <code>type="text"</code> will only allow <kbd>A</kbd> - <kbd>Z</kbd> in uppercase &amp; lowercase, as well as <kbd>space</kbd>'s. The input will return invalid if user tries to input any numbers or special charachters.</p>
+					<form class="example" id="text_input">
+						<label>Your Name</label>
+						<fieldset class="form-group">
+							<input type="text" class="form-control" name="fullname" placeholder="Full Name">
+						</fieldset>
+					</form>
+					<figure class="highlight">
+						<pre><code class="language-html">&lt;fieldset class="form-group"&gt;
+	&lt;input type="text" class="form-control" name="fullname" placeholder="Full Name"&gt;
+&lt;/fieldset&gt;</code></pre>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<h4>Email Address</h4>
+					<p>Fields with <code>type="email"</code> will watch for properly formatted email addresses such as <code>email@address.com</code> and if the input does not match the correct formatting, will return invalid.</p>
+					<form class="example" id="email_input">
+						<label>Email Address <small><i class="fa fa-keyboard-o"></i> Try typing your email in.</small></label>
+						<fieldset class="form-group">
+							<input type="email" class="form-control" name="email" placeholder="Email">
+						</fieldset>
+					</form>
+					<figure class="highlight">
+						<pre><code class="language-html">&lt;fieldset class="form-group"&gt;
+	&lt;input type="email" class="form-control" name="email" placeholder="Email"&gt;
+&lt;/fieldset&gt;</code></pre>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<h4>Phone Number <small class="text-muted">w/ extension</small></h4>
+					<p>Fields with <code>type="phone"</code> will return true if the phone number is formatted with either <code>5555555555</code>, <code>555-555-5555</code>, <code>555 555 5555</code>, or <code>(555) 555 5555</code>.</p>
+					<p>If you wish to append a phone number extension field, add a <code>data-ext="true"</code> attribute to the <code>&lt;input&gt;</code> tag.<br>The extension input will accept only numbers, 5 characters long.</p>
+					<form class="example" id="phone_input">
+						<label>Without Extension <small><i class="fa fa-keyboard-o"></i> Try 555-555-5555</small></label>
+						<fieldset class="form-group">
+							<input type="phone" class="form-control" name="phone" placeholder="Phone Number">
+						</fieldset>
+						<label>With Extension</label>
+						<fieldset class="form-group">
+							<input type="phone" class="form-control" name="phone" placeholder="Phone Number" data-ext="true">
+						</fieldset>
+					</form>
+					<figure class="highlight">
+						<pre><code class="language-html">&lt;!-- Without Extension --&gt;
+&lt;fieldset class="form-group"&gt;
+	&lt;input type="phone" class="form-control" name="phone" placeholder="Phone Number"&gt;
+&lt;/fieldset&gt;
+
+&lt;!-- With Extension --&gt;
+&lt;fieldset class="form-group"&gt;
+	&lt;input type="phone" class="form-control" name="phone" placeholder="Phone Number" data-ext="true"&gt;
+&lt;/fieldset&gt;</code></pre>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<h4>Color Picker</h4>
+					<p>Fields with <code>type="color"</code> will automatically fire the <a href="http://mjolnic.com/bootstrap-colorpicker/" target="_blank">Bootstrap Colorpicker</a> plugin, allowing users to select their color from the popup. If the user types in their own color, validation will make sure that it follows the HEX <code>#FFFFFF</code> pattern, or else will return invalid.</p>
+					<p><a href="http://mjolnic.com/bootstrap-colorpicker/" target="_blank">Bootstrap Colorpicker</a> is written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and the version used was modified by <a href="http://github.com/mjolnic" target="_blank">Javier Aguilar</a>.</p>
+					<form class="example" id="color_input">
+						<label>Color Picker</label>
+						<fieldset class="form-group">
+							<input type="color" class="form-control" name="color" placeholder="#FFFFFF">
+						</fieldset>
+					</form>
+					<figure class="highlight">
+						<pre><code class="language-html">&lt;fieldset class="form-group"&gt;
+	&lt;input type="color" class="form-control" name="color" placeholder="#FFFFFF"&gt;
+&lt;/fieldset&gt;</code></pre>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<h4>Date Picker</h4>
+					<p>Fields with <code>type="date"</code> will automatically fire the <a href="http://bootstrap-datepicker.readthedocs.org/en/latest/" target="_blank">Bootstrap Datepicker</a> plugin, giving users a visual datepicker. If the user types in the date manually, validation will make sure that it follows the <code>MM/DD/YYYY</code> pattern, or else will return invalid.</p>
+					<p><a href="http://bootstrap-datepicker.readthedocs.org/en/latest/" target="_blank">Bootstrap Datepicker</a> is written by <a href="https://twitter.com/stefanpetre/" target="_blank">Stefan Petre</a> and the version used was modified by <a href="https://github.com/eternicode" target="_blank">Andrew Rowls</a>.</p>
+					<form class="example" id="date_input">
+						<label>Date Picker</label>
+						<fieldset class="form-group">
+							<input type="date" class="form-control" name="date" placeholder="MM/DD/YYYY">
+						</fieldset>
+					</form>
+					<figure class="highlight">
+						<pre><code class="language-html">&lt;fieldset class="form-group"&gt;
+	&lt;input type="date" class="form-control" name="date" placeholder="MM/DD/YYYY"&gt;
+&lt;/fieldset&gt;</code></pre>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<h4>Range Field</h4>
+					<p>Input <code>type="range"</code> will be displayed to the user as a pretty / modern looking slider bar, with the option to display the value above it. The value can be displayed by adding a <code>placeholder</code> attribute to the inputs tag, such as <code>placeholder="Range"</code>.</p>
+					<p>The range slider is customizable by adding the <code>min</code> or <code>max</code> attributes. The default value can be chosen by adding the <code>value</code> attribute, and javascript will automatically update value shown above it.</p>
+					<form class="example" id="range_input">
+						<label>Without Placeholder</label>
+						<fieldset class="form-group">
+							<input type="range" class="form-control" name="range" value="0">
+						</fieldset>
+						<label>With Placeholder</label>
+						<fieldset class="form-group">
+							<input type="range" class="form-control" name="range" value="0" placeholder="Range">
+						</fieldset>
+						<label>With Value, Min &amp; Max</label>
+						<fieldset class="form-group">
+							<input type="range" class="form-control" name="range" value="30" min="20" max="80" placeholder="Range">
+						</fieldset>
+					</form>
+					<figure class="highlight">
+						<pre><code class="language-html">&lt;!-- Without Placeholder --&gt;
+&lt;fieldset class="form-group"&gt;
+	&lt;input type="range" class="form-control" name="range" value="0"&gt;
+&lt;/fieldset&gt;
+
+&lt;!-- With Placeholder --&gt;
+&lt;fieldset class="form-group"&gt;
+	&lt;input type="range" class="form-control" name="range" value="0" placeholder="Range"&gt;
+&lt;/fieldset&gt;
+
+&lt;!-- With Value, Min &amp; Max --&gt;
+&lt;fieldset class="form-group"&gt;
+	&lt;input type="range" class="form-control" name="range" value="30" min="20" max="80" placeholder="Range"&gt;
+&lt;/fieldset&gt;</code></pre>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<h4>Textarea</h4>
+					<p><code>&lt;textarea&gt;</code>'s in prettyValidate allow all characters as long as it doesn't detect a HTML string formed. Like any other textarea, the height can be adjusted using <code>rows=""</code>.</p>
+					<form class="example" id="textarea_input">
+						<label>HTML Test <small><i class="fa fa-keyboard-o"></i> Try writing <code>&lt;div&gt;</code></small></label>
+						<fieldset class="form-group">
+							<textarea class="form-control" name="textarea" rows="3" placeholder="Textarea"></textarea>
+						</fieldset>
+					</form>
+					<figure class="highlight">
+						<pre><code class="language-html">&lt;fieldset class="form-group"&gt;
+	&lt;input type="email" class="form-control" name="email" placeholder="Email"&gt;
+&lt;/fieldset&gt;</code></pre>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-xl-8 col-lg-offset-1 col-xl-offset-2">
+					<h4>Multiple Inputs</h4>
+					<p>If you'd like to display multiple inputs inline simply add the class <code>input-group</code> to the parent <code>&lt;fieldset&gt;</code> tag. As of now, prettyValidate only supports 2 inputs within the same fieldset, but eventually will allow for up to 4.</p>
+					<form class="example" id="split_input">
+						<label>First &amp; Last Name</label>
+						<fieldset class="form-group input-group">
+							<input type="text" class="form-control" name="firstname" placeholder="First Name">
+							<input type="text" class="form-control" name="lastname" placeholder="Last Name">
+						</fieldset>
+					</form>
+					<figure class="highlight">
+						<pre><code class="language-html">&lt;fieldset class="form-group input-group"&gt;
+	&lt;input type="text" class="form-control" name="firstname" placeholder="First Name"&gt;
+	&lt;input type="text" class="form-control" name="lastname" placeholder="Last Name"&gt;
+&lt;/fieldset&gt;</code></pre>
 					</figure>
 				</div>
 			</section>
@@ -172,14 +476,14 @@ $("#form").prettyValidate({
 				</div>
 				<a href="#top" class="pagenav prev dark hidden-xs-down">back to<span></span>the top</a>
 				<div class="center-vertical col-sm-10 col-md-8 col-lg-6 col-xl-4 col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xl-offset-4">
-					<form class="contact">
+					<form class="contact" action="hosted/contact.php" method="POST">
 						<h4>Contact Dev</h4>
 						<small>I will try to get back to you as soon as I can.</small>
 						<div class="line"></div>
 						<fieldset class="form-group"><input type="text" class="form-control required" name="firstname" placeholder="First Name"></fieldset>
 						<fieldset class="form-group"><input type="text" class="form-control required" name="lastname" placeholder="Last Name"></fieldset>
 						<fieldset class="form-group"><input type="email" class="form-control required" name="email" placeholder="Email"></fieldset>
-						<fieldset class="form-group"><textarea class="form-control required" placeholder="Comments" rows="5"></textarea></fieldset>
+						<fieldset class="form-group"><textarea class="form-control required" placeholder="Comments" name="comments" rows="5"></textarea></fieldset>
 						<div class="description"><span>*</span> = Required</div>
 						<div class="btn-group">
 							<button type="submit" class="btn btn-primary">Submit Form</button>
@@ -206,6 +510,7 @@ $("#form").prettyValidate({
 				</div>
 			</section>
 		</footer>
+		<script src="//assets.codepen.io/assets/embed/ei.js" async></script>
 		<script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
 		<script type="text/javascript" src="assets/js/clipboard.min.js"></script>
